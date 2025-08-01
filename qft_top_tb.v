@@ -9,7 +9,7 @@
 // Include all other modules used directly or indirectly by the testbench
 // Using include guards will prevent re-declarations.
 `include "cos_sin_lut.v"
-`include "exp_lut_8_segment.v"
+`include "exp_lut_8_segment.v" // Now a full LUT
 `include "x_gate.v"
 `include "qft_2_qubit.v"
 `include "quantum_state_magnitudes.v"
@@ -138,8 +138,8 @@ module qft_top_tb;
 
         $display("Starting Simulation with S_%0d.%0d fixed-point format (Total %0d bits)", `INT_BITS, `FX_BITS, `TOTAL_BITS); // Using global macros directly
 
-        // --- Test 1: exp_lut_8_segment ---
-        $display("\n*** Testing exp_lut_8_segment ***");
+        // --- Test 1: exp_lut_8_segment (now a full 256-entry LUT) ---
+        $display("\n*** Testing exp_lut_8_segment (Full LUT) ***");
         tb_exp_x_in = float_to_fixed_tb_func(0.0);
         #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
                       fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
@@ -156,11 +156,23 @@ module qft_top_tb;
         #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
                       fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
 
+        tb_exp_x_in = float_to_fixed_tb_func(3.0); 
+        #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
+                      fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
+
+        tb_exp_x_in = float_to_fixed_tb_func(4.0); 
+        #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
+                      fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
+
         tb_exp_x_in = float_to_fixed_tb_func(5.0); 
         #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
                       fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
 
         tb_exp_x_in = float_to_fixed_tb_func(-1.0); 
+        #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
+                      fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
+
+        tb_exp_x_in = float_to_fixed_tb_func(-0.5); 
         #10 $display("Input x = %.4f (Fixed: %d), Output e^x = %.4f (Fixed: %d)",
                       fixed_to_float_tb_func(tb_exp_x_in), tb_exp_x_in, fixed_to_float_tb_func(tb_exp_x_out), tb_exp_x_out);
 
