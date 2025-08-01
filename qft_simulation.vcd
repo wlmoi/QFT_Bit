@@ -1,0 +1,1209 @@
+$date
+	Fri Aug 01 22:48:27 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module qft_top_tb $end
+$var wire 1 ! tb_x_gate_out $end
+$var wire 32 " tb_sampler_mag_sq_out [31:0] $end
+$var wire 64 # tb_qft_q_state_out [63:0] $end
+$var wire 8 $ tb_exp_x_out [7:0] $end
+$var parameter 64 % COMP_BITS $end
+$var parameter 96 & QSTATE_BITS $end
+$var reg 1 ' clk $end
+$var reg 1 ( rst_n $end
+$var reg 8 ) tb_exp_x_in [7:0] $end
+$var reg 64 * tb_qft_q_state_in [63:0] $end
+$var reg 64 + tb_sampler_q_state_in [63:0] $end
+$var reg 1 , tb_x_gate_in $end
+$scope function fixed_to_float_tb_func $end
+$var reg 8 - fixed_val [7:0] $end
+$upscope $end
+$scope function float_to_fixed_tb_func $end
+$var real 1 . float_val $end
+$upscope $end
+$scope module u_exp_lut $end
+$var wire 8 / exp_x_out [7:0] $end
+$var wire 8 0 x_in [7:0] $end
+$var parameter 40 1 LUT_SIZE $end
+$scope function fixed_to_float_local $end
+$var reg 8 2 fixed_val [7:0] $end
+$upscope $end
+$scope function float_to_fixed_local $end
+$var real 1 3 float_val $end
+$upscope $end
+$scope function signed_to_unsigned_index $end
+$var reg 8 4 signed_input [7:0] $end
+$upscope $end
+$scope begin $unm_blk_7 $end
+$var integer 32 5 i [31:0] $end
+$scope begin $unm_blk_8 $end
+$var real 1 6 exp_x_real $end
+$var real 1 7 x_real $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module u_qft_2_qubit $end
+$var wire 16 8 amp_00_cphase [15:0] $end
+$var wire 16 9 amp_01_cphase [15:0] $end
+$var wire 16 : amp_10_cphase [15:0] $end
+$var wire 64 ; q_state_in [63:0] $end
+$var wire 16 < temp_sum_01_11 [15:0] $end
+$var wire 16 = temp_sum_00_10 [15:0] $end
+$var wire 16 > temp_diff_01_11 [15:0] $end
+$var wire 16 ? temp_diff_00_10 [15:0] $end
+$var wire 8 @ sin_val_cphase [7:0] $end
+$var wire 64 A q_state_out [63:0] $end
+$var wire 16 B phase_factor_cphase [15:0] $end
+$var wire 8 C cos_val_cphase [7:0] $end
+$var wire 16 D amp_11_in [15:0] $end
+$var wire 16 E amp_11_h0 [15:0] $end
+$var wire 16 F amp_11_cphase_res [15:0] $end
+$var wire 16 G amp_10_in [15:0] $end
+$var wire 16 H amp_10_h0 [15:0] $end
+$var wire 16 I amp_01_in [15:0] $end
+$var wire 16 J amp_01_h0 [15:0] $end
+$var wire 16 K amp_00_in [15:0] $end
+$var wire 16 L amp_00_h0 [15:0] $end
+$var parameter 8 M ONE_OVER_SQRT2 $end
+$var parameter 8 N PI_OVER_2_FX $end
+$scope module add_00_10_inst $end
+$var wire 16 O q1_in [15:0] $end
+$var wire 16 P q2_in [15:0] $end
+$var wire 16 Q q_out [15:0] $end
+$var wire 8 R q2_real [7:0] $end
+$var wire 8 S q2_imag [7:0] $end
+$var wire 8 T q1_real [7:0] $end
+$var wire 8 U q1_imag [7:0] $end
+$var wire 8 V out_real [7:0] $end
+$var wire 8 W out_imag [7:0] $end
+$scope module add_imag_inst $end
+$var wire 8 X a [7:0] $end
+$var wire 8 Y b [7:0] $end
+$var wire 8 Z sum [7:0] $end
+$upscope $end
+$scope module add_real_inst $end
+$var wire 8 [ a [7:0] $end
+$var wire 8 \ b [7:0] $end
+$var wire 8 ] sum [7:0] $end
+$upscope $end
+$upscope $end
+$scope module add_01_11_inst $end
+$var wire 16 ^ q1_in [15:0] $end
+$var wire 16 _ q2_in [15:0] $end
+$var wire 16 ` q_out [15:0] $end
+$var wire 8 a q2_real [7:0] $end
+$var wire 8 b q2_imag [7:0] $end
+$var wire 8 c q1_real [7:0] $end
+$var wire 8 d q1_imag [7:0] $end
+$var wire 8 e out_real [7:0] $end
+$var wire 8 f out_imag [7:0] $end
+$scope module add_imag_inst $end
+$var wire 8 g a [7:0] $end
+$var wire 8 h b [7:0] $end
+$var wire 8 i sum [7:0] $end
+$upscope $end
+$scope module add_real_inst $end
+$var wire 8 j a [7:0] $end
+$var wire 8 k b [7:0] $end
+$var wire 8 l sum [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cphase_pi2_lut $end
+$var wire 8 m angle_in [7:0] $end
+$var wire 8 n cos_out [7:0] $end
+$var wire 8 o sin_out [7:0] $end
+$var wire 3 p lut_index [2:0] $end
+$var parameter 32 q NUM_SEGMENTS $end
+$scope function clogb2 $end
+$var integer 32 r value [31:0] $end
+$upscope $end
+$upscope $end
+$scope module mult_11_phase_inst $end
+$var wire 16 s q2_in [15:0] $end
+$var wire 16 t q_out [15:0] $end
+$var wire 16 u q1_in [15:0] $end
+$var wire 8 v out_real [7:0] $end
+$var wire 8 w out_imag [7:0] $end
+$var wire 8 x bd [7:0] $end
+$var wire 8 y bc [7:0] $end
+$var wire 8 z b_real [7:0] $end
+$var wire 8 { b_imag [7:0] $end
+$var wire 8 | ad [7:0] $end
+$var wire 8 } ac [7:0] $end
+$var wire 8 ~ a_real [7:0] $end
+$var wire 8 !" a_imag [7:0] $end
+$scope module add_imag_part_inst $end
+$var wire 8 "" sum [7:0] $end
+$var wire 8 #" b [7:0] $end
+$var wire 8 $" a [7:0] $end
+$upscope $end
+$scope module mult_ac_inst $end
+$var wire 8 %" a [7:0] $end
+$var wire 8 &" b [7:0] $end
+$var wire 16 '" temp_product [15:0] $end
+$var wire 8 (" product [7:0] $end
+$upscope $end
+$scope module mult_ad_inst $end
+$var wire 8 )" a [7:0] $end
+$var wire 8 *" b [7:0] $end
+$var wire 16 +" temp_product [15:0] $end
+$var wire 8 ," product [7:0] $end
+$upscope $end
+$scope module mult_bc_inst $end
+$var wire 8 -" a [7:0] $end
+$var wire 8 ." b [7:0] $end
+$var wire 16 /" temp_product [15:0] $end
+$var wire 8 0" product [7:0] $end
+$upscope $end
+$scope module mult_bd_inst $end
+$var wire 8 1" a [7:0] $end
+$var wire 8 2" b [7:0] $end
+$var wire 16 3" temp_product [15:0] $end
+$var wire 8 4" product [7:0] $end
+$upscope $end
+$scope module sub_real_part_inst $end
+$var wire 8 5" a [7:0] $end
+$var wire 8 6" b [7:0] $end
+$var wire 8 7" diff [7:0] $end
+$upscope $end
+$upscope $end
+$scope module scale_00_h0_inst $end
+$var wire 16 8" q_in [15:0] $end
+$var wire 8 9" scalar [7:0] $end
+$var wire 16 :" q_out [15:0] $end
+$var wire 8 ;" out_real [7:0] $end
+$var wire 8 <" out_imag [7:0] $end
+$var wire 8 =" a_real [7:0] $end
+$var wire 8 >" a_imag [7:0] $end
+$scope module mult_imag_part_inst $end
+$var wire 8 ?" a [7:0] $end
+$var wire 8 @" b [7:0] $end
+$var wire 16 A" temp_product [15:0] $end
+$var wire 8 B" product [7:0] $end
+$upscope $end
+$scope module mult_real_part_inst $end
+$var wire 8 C" a [7:0] $end
+$var wire 8 D" b [7:0] $end
+$var wire 16 E" temp_product [15:0] $end
+$var wire 8 F" product [7:0] $end
+$upscope $end
+$upscope $end
+$scope module scale_01_h0_inst $end
+$var wire 16 G" q_in [15:0] $end
+$var wire 8 H" scalar [7:0] $end
+$var wire 16 I" q_out [15:0] $end
+$var wire 8 J" out_real [7:0] $end
+$var wire 8 K" out_imag [7:0] $end
+$var wire 8 L" a_real [7:0] $end
+$var wire 8 M" a_imag [7:0] $end
+$scope module mult_imag_part_inst $end
+$var wire 8 N" a [7:0] $end
+$var wire 8 O" b [7:0] $end
+$var wire 16 P" temp_product [15:0] $end
+$var wire 8 Q" product [7:0] $end
+$upscope $end
+$scope module mult_real_part_inst $end
+$var wire 8 R" a [7:0] $end
+$var wire 8 S" b [7:0] $end
+$var wire 16 T" temp_product [15:0] $end
+$var wire 8 U" product [7:0] $end
+$upscope $end
+$upscope $end
+$scope module scale_10_h0_inst $end
+$var wire 8 V" scalar [7:0] $end
+$var wire 16 W" q_out [15:0] $end
+$var wire 16 X" q_in [15:0] $end
+$var wire 8 Y" out_real [7:0] $end
+$var wire 8 Z" out_imag [7:0] $end
+$var wire 8 [" a_real [7:0] $end
+$var wire 8 \" a_imag [7:0] $end
+$scope module mult_imag_part_inst $end
+$var wire 8 ]" a [7:0] $end
+$var wire 8 ^" b [7:0] $end
+$var wire 16 _" temp_product [15:0] $end
+$var wire 8 `" product [7:0] $end
+$upscope $end
+$scope module mult_real_part_inst $end
+$var wire 8 a" a [7:0] $end
+$var wire 8 b" b [7:0] $end
+$var wire 16 c" temp_product [15:0] $end
+$var wire 8 d" product [7:0] $end
+$upscope $end
+$upscope $end
+$scope module scale_11_h0_inst $end
+$var wire 8 e" scalar [7:0] $end
+$var wire 16 f" q_out [15:0] $end
+$var wire 16 g" q_in [15:0] $end
+$var wire 8 h" out_real [7:0] $end
+$var wire 8 i" out_imag [7:0] $end
+$var wire 8 j" a_real [7:0] $end
+$var wire 8 k" a_imag [7:0] $end
+$scope module mult_imag_part_inst $end
+$var wire 8 l" a [7:0] $end
+$var wire 8 m" b [7:0] $end
+$var wire 16 n" temp_product [15:0] $end
+$var wire 8 o" product [7:0] $end
+$upscope $end
+$scope module mult_real_part_inst $end
+$var wire 8 p" a [7:0] $end
+$var wire 8 q" b [7:0] $end
+$var wire 16 r" temp_product [15:0] $end
+$var wire 8 s" product [7:0] $end
+$upscope $end
+$upscope $end
+$scope module sub_00_10_inst $end
+$var wire 16 t" q1_in [15:0] $end
+$var wire 16 u" q2_in [15:0] $end
+$var wire 16 v" q_out [15:0] $end
+$var wire 8 w" q2_real [7:0] $end
+$var wire 8 x" q2_imag [7:0] $end
+$var wire 8 y" q1_real [7:0] $end
+$var wire 8 z" q1_imag [7:0] $end
+$var wire 8 {" out_real [7:0] $end
+$var wire 8 |" out_imag [7:0] $end
+$scope module sub_imag_inst $end
+$var wire 8 }" a [7:0] $end
+$var wire 8 ~" b [7:0] $end
+$var wire 8 !# diff [7:0] $end
+$upscope $end
+$scope module sub_real_inst $end
+$var wire 8 "# a [7:0] $end
+$var wire 8 ## b [7:0] $end
+$var wire 8 $# diff [7:0] $end
+$upscope $end
+$upscope $end
+$scope module sub_01_11_inst $end
+$var wire 16 %# q1_in [15:0] $end
+$var wire 16 &# q2_in [15:0] $end
+$var wire 16 '# q_out [15:0] $end
+$var wire 8 (# q2_real [7:0] $end
+$var wire 8 )# q2_imag [7:0] $end
+$var wire 8 *# q1_real [7:0] $end
+$var wire 8 +# q1_imag [7:0] $end
+$var wire 8 ,# out_real [7:0] $end
+$var wire 8 -# out_imag [7:0] $end
+$scope module sub_imag_inst $end
+$var wire 8 .# a [7:0] $end
+$var wire 8 /# b [7:0] $end
+$var wire 8 0# diff [7:0] $end
+$upscope $end
+$scope module sub_real_inst $end
+$var wire 8 1# a [7:0] $end
+$var wire 8 2# b [7:0] $end
+$var wire 8 3# diff [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module u_sampler $end
+$var wire 64 4# q_state_in [63:0] $end
+$var wire 8 5# r_sq_11 [7:0] $end
+$var wire 8 6# r_sq_10 [7:0] $end
+$var wire 8 7# r_sq_01 [7:0] $end
+$var wire 8 8# r_sq_00 [7:0] $end
+$var wire 8 9# r_11 [7:0] $end
+$var wire 8 :# r_10 [7:0] $end
+$var wire 8 ;# r_01 [7:0] $end
+$var wire 8 <# r_00 [7:0] $end
+$var wire 32 =# mag_sq_out [31:0] $end
+$var wire 8 ># mag_sq_11_w [7:0] $end
+$var wire 8 ?# mag_sq_10_w [7:0] $end
+$var wire 8 @# mag_sq_01_w [7:0] $end
+$var wire 8 A# mag_sq_00_w [7:0] $end
+$var wire 8 B# i_sq_11 [7:0] $end
+$var wire 8 C# i_sq_10 [7:0] $end
+$var wire 8 D# i_sq_01 [7:0] $end
+$var wire 8 E# i_sq_00 [7:0] $end
+$var wire 8 F# i_11 [7:0] $end
+$var wire 8 G# i_10 [7:0] $end
+$var wire 8 H# i_01 [7:0] $end
+$var wire 8 I# i_00 [7:0] $end
+$var wire 16 J# amp_11 [15:0] $end
+$var wire 16 K# amp_10 [15:0] $end
+$var wire 16 L# amp_01 [15:0] $end
+$var wire 16 M# amp_00 [15:0] $end
+$var parameter 32 N# LOCAL_FX_BITS $end
+$var parameter 32 O# LOCAL_TOTAL_BITS $end
+$scope module i_00_sq_inst $end
+$var wire 8 P# a [7:0] $end
+$var wire 8 Q# b [7:0] $end
+$var wire 16 R# temp_product [15:0] $end
+$var wire 8 S# product [7:0] $end
+$upscope $end
+$scope module i_01_sq_inst $end
+$var wire 8 T# a [7:0] $end
+$var wire 8 U# b [7:0] $end
+$var wire 16 V# temp_product [15:0] $end
+$var wire 8 W# product [7:0] $end
+$upscope $end
+$scope module i_10_sq_inst $end
+$var wire 8 X# a [7:0] $end
+$var wire 8 Y# b [7:0] $end
+$var wire 16 Z# temp_product [15:0] $end
+$var wire 8 [# product [7:0] $end
+$upscope $end
+$scope module i_11_sq_inst $end
+$var wire 8 \# a [7:0] $end
+$var wire 8 ]# b [7:0] $end
+$var wire 16 ^# temp_product [15:0] $end
+$var wire 8 _# product [7:0] $end
+$upscope $end
+$scope module r_00_sq_inst $end
+$var wire 8 `# a [7:0] $end
+$var wire 8 a# b [7:0] $end
+$var wire 16 b# temp_product [15:0] $end
+$var wire 8 c# product [7:0] $end
+$upscope $end
+$scope module r_01_sq_inst $end
+$var wire 8 d# a [7:0] $end
+$var wire 8 e# b [7:0] $end
+$var wire 16 f# temp_product [15:0] $end
+$var wire 8 g# product [7:0] $end
+$upscope $end
+$scope module r_10_sq_inst $end
+$var wire 8 h# a [7:0] $end
+$var wire 8 i# b [7:0] $end
+$var wire 16 j# temp_product [15:0] $end
+$var wire 8 k# product [7:0] $end
+$upscope $end
+$scope module r_11_sq_inst $end
+$var wire 8 l# a [7:0] $end
+$var wire 8 m# b [7:0] $end
+$var wire 16 n# temp_product [15:0] $end
+$var wire 8 o# product [7:0] $end
+$upscope $end
+$scope module sum_00_sq_inst $end
+$var wire 8 p# a [7:0] $end
+$var wire 8 q# b [7:0] $end
+$var wire 8 r# sum [7:0] $end
+$upscope $end
+$scope module sum_01_sq_inst $end
+$var wire 8 s# a [7:0] $end
+$var wire 8 t# b [7:0] $end
+$var wire 8 u# sum [7:0] $end
+$upscope $end
+$scope module sum_10_sq_inst $end
+$var wire 8 v# a [7:0] $end
+$var wire 8 w# b [7:0] $end
+$var wire 8 x# sum [7:0] $end
+$upscope $end
+$scope module sum_11_sq_inst $end
+$var wire 8 y# a [7:0] $end
+$var wire 8 z# b [7:0] $end
+$var wire 8 {# sum [7:0] $end
+$upscope $end
+$upscope $end
+$scope module u_x_gate $end
+$var wire 1 , q_in $end
+$var wire 1 ! q_out $end
+$upscope $end
+$scope task print_complex_fp_task $end
+$var reg 16 |# complex_val [15:0] $end
+$upscope $end
+$scope task print_mag_sq_task $end
+$var reg 32 }# mag_sq_val [31:0] $end
+$upscope $end
+$scope task print_qstate_vector_task $end
+$var reg 64 ~# q_state [63:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1000 O#
+b100 N#
+b1000 q
+b11001 N
+b1011 M
+b100000000 1
+b1000000 &
+b10000 %
+$end
+#0
+$dumpvars
+bx ~#
+bx }#
+bx |#
+bx {#
+bx z#
+bx y#
+bx x#
+bx w#
+bx v#
+bx u#
+bx t#
+bx s#
+bx r#
+bx q#
+bx p#
+bx o#
+bx n#
+bx m#
+bx l#
+bx k#
+bx j#
+bx i#
+bx h#
+bx g#
+bx f#
+bx e#
+bx d#
+bx c#
+bx b#
+bx a#
+bx `#
+bx _#
+bx ^#
+bx ]#
+bx \#
+bx [#
+bx Z#
+bx Y#
+bx X#
+bx W#
+bx V#
+bx U#
+bx T#
+bx S#
+bx R#
+bx Q#
+bx P#
+bx M#
+bx L#
+bx K#
+bx J#
+bx I#
+bx H#
+bx G#
+bx F#
+bx E#
+bx D#
+bx C#
+bx B#
+bx A#
+bx @#
+bx ?#
+bx >#
+bx =#
+bx <#
+bx ;#
+bx :#
+bx 9#
+bx 8#
+bx 7#
+bx 6#
+bx 5#
+bx 4#
+bx 3#
+bx 2#
+bx 1#
+bx 0#
+bx /#
+bx .#
+bx -#
+bx ,#
+bx +#
+bx *#
+bx )#
+bx (#
+bx '#
+bx &#
+bx %#
+bx $#
+bx ##
+bx "#
+bx !#
+bx ~"
+bx }"
+bx |"
+bx {"
+bx z"
+bx y"
+bx x"
+bx w"
+bx v"
+bx u"
+bx t"
+bx s"
+bx r"
+b1011 q"
+bx p"
+bx o"
+bx n"
+b1011 m"
+bx l"
+bx k"
+bx j"
+bx i"
+bx h"
+bx g"
+bx f"
+b1011 e"
+bx d"
+bx c"
+b1011 b"
+bx a"
+bx `"
+bx _"
+b1011 ^"
+bx ]"
+bx \"
+bx ["
+bx Z"
+bx Y"
+bx X"
+bx W"
+b1011 V"
+bx U"
+bx T"
+b1011 S"
+bx R"
+bx Q"
+bx P"
+b1011 O"
+bx N"
+bx M"
+bx L"
+bx K"
+bx J"
+bx I"
+b1011 H"
+bx G"
+bx F"
+bx E"
+b1011 D"
+bx C"
+bx B"
+bx A"
+b1011 @"
+bx ?"
+bx >"
+bx ="
+bx <"
+bx ;"
+bx :"
+b1011 9"
+bx 8"
+bx 7"
+bx 6"
+bx 5"
+bx 4"
+bx 3"
+b1011 2"
+bx 1"
+bx 0"
+bx /"
+b1011 ."
+bx -"
+bx ,"
+bx +"
+b1011 *"
+bx )"
+bx ("
+bx '"
+b1011 &"
+bx %"
+bx $"
+bx #"
+bx ""
+bx !"
+bx ~
+bx }
+bx |
+b1011 {
+b1011 z
+bx y
+bx x
+bx w
+bx v
+bx u
+bx t
+b101100001011 s
+bx r
+b1 p
+b1011 o
+b1011 n
+b11001 m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+bx f
+bx e
+bx d
+bx c
+bx b
+bx a
+bx `
+bx _
+bx ^
+bx ]
+bx \
+bx [
+bx Z
+bx Y
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+b1011 C
+b101100001011 B
+bx A
+b1011 @
+bx ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+r-0.0625 7
+r0.9394130628134758 6
+b100000000 5
+bx 4
+r0.9394130628134758 3
+b11111111 2
+bx 0
+bx /
+r0 .
+bx -
+x,
+bx +
+bx *
+bx )
+0(
+0'
+bx $
+bx #
+bx "
+x!
+$end
+#5
+1'
+#10
+b10000 $
+b10000 /
+b0 4
+0'
+b0 )
+b0 0
+1(
+#15
+1'
+#20
+b11111 $
+b11111 /
+b1011 4
+0'
+b1011 )
+b1011 0
+r0.74 .
+b10000 -
+#25
+1'
+#30
+b101011 $
+b101011 /
+b10000 4
+0'
+b10000 )
+b10000 0
+r1 .
+b11111 -
+#35
+1'
+#40
+b1110110 $
+b1110110 /
+b100000 4
+0'
+b100000 )
+b100000 0
+r2 .
+b101011 -
+#45
+1'
+#50
+b1111111 $
+b1111111 /
+b110000 4
+0'
+b110000 )
+b110000 0
+r3 .
+b1110110 -
+#55
+1'
+#60
+b1000000 4
+0'
+b1000000 )
+b1000000 0
+r4 .
+b1111111 -
+#65
+1'
+#70
+b1010000 4
+0'
+b1010000 )
+b1010000 0
+r5 .
+b1111111 -
+#75
+1'
+#80
+b101 $
+b101 /
+b11110000 4
+0'
+b11110000 )
+b11110000 0
+r-1 .
+b1111111 -
+#85
+1'
+#90
+b1001 $
+b1001 /
+b11111000 4
+0'
+b11111000 )
+b11111000 0
+r-0.5 .
+b101 -
+#95
+1'
+#100
+1!
+0'
+0,
+b1001 -
+#105
+1'
+#110
+0!
+0'
+1,
+#115
+1'
+#120
+b0 v
+b0 7"
+b0 }
+b0 ("
+b0 5"
+b0 F
+b0 t
+b0 w
+b0 ""
+b0 |
+b0 $"
+b0 ,"
+b0 y
+b0 #"
+b0 0"
+b0 x
+b0 4"
+b0 6"
+b0 '"
+b0 +"
+b0 ~
+b0 %"
+b0 )"
+b0 /"
+b0 3"
+b0 !"
+b0 -"
+b0 1"
+b1011 ;"
+b1011 F"
+b101100000000 8
+b101100000000 L
+b101100000000 :"
+b0 <"
+b0 B"
+b1011 Y"
+b1011 d"
+b101100000000 :
+b101100000000 H
+b101100000000 W"
+b0 Z"
+b0 `"
+b0 J"
+b0 U"
+b101100000000000010110000000000000000000000000000000000000000 #
+b101100000000000010110000000000000000000000000000000000000000 A
+b0 9
+b0 J
+b0 I"
+b0 K"
+b0 Q"
+b0 h"
+b0 s"
+b0 E
+b0 u
+b0 f"
+b0 i"
+b0 o"
+b10110000 E"
+b10000 ="
+b10000 C"
+b0 A"
+b0 >"
+b0 ?"
+b10110000 c"
+b10000 ["
+b10000 a"
+b0 _"
+b0 \"
+b0 ]"
+b0 T"
+b0 L"
+b0 R"
+b0 P"
+b0 M"
+b0 N"
+b0 r"
+b0 j"
+b0 p"
+b0 n"
+b0 k"
+b0 l"
+b10000 V
+b10000 ]
+b10000 T
+b10000 [
+b1000000000000 =
+b1000000000000 Q
+b1000000000000 8"
+b0 W
+b0 Z
+b0 U
+b0 X
+b10000 {"
+b10000 $#
+b10000 y"
+b10000 "#
+b1000000000000 ?
+b1000000000000 X"
+b1000000000000 v"
+b0 |"
+b0 !#
+b0 z"
+b0 }"
+b0 e
+b0 l
+b0 c
+b0 j
+b0 <
+b0 `
+b0 G"
+b0 f
+b0 i
+b0 d
+b0 g
+b0 ,#
+b0 3#
+b0 *#
+b0 1#
+b0 >
+b0 g"
+b0 '#
+b0 -#
+b0 0#
+b0 +#
+b0 .#
+b0 R
+b0 \
+b0 S
+b0 Y
+b0 w"
+b0 ##
+b0 x"
+b0 ~"
+b0 a
+b0 k
+b0 b
+b0 h
+b0 (#
+b0 2#
+b0 )#
+b0 /#
+b1000000000000 K
+b1000000000000 O
+b1000000000000 t"
+b0 I
+b0 ^
+b0 %#
+b0 G
+b0 P
+b0 u"
+b0 D
+b0 _
+b0 &#
+0'
+b1000000000000000000000000000000000000000000000000000000000000 *
+b1000000000000000000000000000000000000000000000000000000000000 ;
+r0 .
+#125
+1'
+#130
+0'
+b0 -
+b0 |#
+b1000000000000000000000000000000000000000000000000000000000000 ~#
+#135
+1'
+#140
+b111 v
+b111 7"
+b111 }
+b111 ("
+b111 5"
+b11100000111 F
+b11100000111 t
+b111 w
+b111 ""
+b111 |
+b111 $"
+b111 ,"
+b1111001 '"
+b1111001 +"
+b1011 ~
+b1011 %"
+b1011 )"
+b0 8
+b0 L
+b0 :"
+b0 ;"
+b0 F"
+b0 :
+b0 H
+b0 W"
+b0 Y"
+b0 d"
+b1011000000000000011100000111 #
+b1011000000000000011100000111 A
+b101100000000 9
+b101100000000 J
+b101100000000 I"
+b1011 J"
+b1011 U"
+b101100000000 E
+b101100000000 u
+b101100000000 f"
+b1011 h"
+b1011 s"
+b0 E"
+b0 ="
+b0 C"
+b0 c"
+b0 ["
+b0 a"
+b10110000 T"
+b10000 L"
+b10000 R"
+b10110000 r"
+b10000 j"
+b10000 p"
+b0 =
+b0 Q
+b0 8"
+b0 V
+b0 ]
+b0 T
+b0 [
+b0 ?
+b0 X"
+b0 v"
+b0 {"
+b0 $#
+b0 y"
+b0 "#
+b1000000000000 <
+b1000000000000 `
+b1000000000000 G"
+b10000 e
+b10000 l
+b10000 c
+b10000 j
+b1000000000000 >
+b1000000000000 g"
+b1000000000000 '#
+b10000 ,#
+b10000 3#
+b10000 *#
+b10000 1#
+b0 K
+b0 O
+b0 t"
+b1000000000000 I
+b1000000000000 ^
+b1000000000000 %#
+0'
+b100000000000000000000000000000000000000000000 *
+b100000000000000000000000000000000000000000000 ;
+r0 .
+b0 -
+b0 |#
+b101100000000000010110000000000000000000000000000000000000000 ~#
+#145
+1'
+#150
+0'
+b0 -
+b0 |#
+b100000000000000000000000000000000000000000000 ~#
+#155
+1'
+#160
+b0 A#
+b0 r#
+b0 8#
+b0 c#
+b0 p#
+b0 E#
+b0 S#
+b0 q#
+b0 @#
+b0 u#
+b0 7#
+b0 g#
+b0 s#
+b0 D#
+b0 W#
+b0 t#
+b111 ?#
+b111 x#
+b111 6#
+b111 k#
+b111 v#
+b0 C#
+b0 [#
+b0 w#
+b11100000110 "
+b11100000110 =#
+b110 >#
+b110 {#
+b11 5#
+b11 o#
+b11 y#
+b11 B#
+b11 _#
+b11 z#
+b0 b#
+b0 <#
+b0 `#
+b0 a#
+b0 R#
+b0 I#
+b0 P#
+b0 Q#
+b0 f#
+b0 ;#
+b0 d#
+b0 e#
+b0 V#
+b0 H#
+b0 T#
+b0 U#
+b1111001 j#
+b1011 :#
+b1011 h#
+b1011 i#
+b0 Z#
+b0 G#
+b0 X#
+b0 Y#
+b110001 n#
+b111 9#
+b111 l#
+b111 m#
+b110001 ^#
+b111 F#
+b111 \#
+b111 ]#
+b0 M#
+b0 L#
+b101100000000 K#
+b11100000111 J#
+0'
+b1011000000000000011100000111 +
+b1011000000000000011100000111 4#
+b111 -
+b11100000111 |#
+b1011000000000000011100000111 ~#
+#165
+1'
+#170
+b111 A#
+b111 r#
+b111 8#
+b111 c#
+b111 p#
+b0 5#
+b0 o#
+b0 y#
+b111000000000000011100000000 "
+b111000000000000011100000000 =#
+b0 >#
+b0 {#
+b0 B#
+b0 _#
+b0 z#
+b1111001 b#
+b1011 <#
+b1011 `#
+b1011 a#
+b0 n#
+b0 9#
+b0 l#
+b0 m#
+b0 ^#
+b0 F#
+b0 \#
+b0 ]#
+b101100000000 M#
+b0 J#
+0'
+b101100000000000000000000000000001011000000000000000000000000 +
+b101100000000000000000000000000001011000000000000000000000000 4#
+r0 .
+b110 -
+b11100000110 }#
+#175
+1'
+#180
+0'
+b0 -
+b0 |#
+b101100000000000000000000000000001011000000000000000000000000 ~#
+#185
+1'
+#190
+0'
+b0 -
+b111000000000000011100000000 }#

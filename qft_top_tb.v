@@ -132,6 +132,11 @@ module qft_top_tb;
 
     // --- Initial Block for Stimulus ---
     initial begin
+        // --- Tambahkan dua baris ini untuk menghasilkan waveform VCD ---
+        $dumpfile("qft_simulation.vcd");
+        $dumpvars(0, qft_top_tb);
+        // -----------------------------------------------------------
+
         clk = 0;
         rst_n = 0;
         #10 rst_n = 1; // De-assert reset

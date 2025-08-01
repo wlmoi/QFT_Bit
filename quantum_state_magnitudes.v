@@ -42,7 +42,7 @@ module quantum_state_magnitudes(
     // These outputs come from fixed_mult, which produces LOCAL_TOTAL_BITS wide output.
     wire signed [LOCAL_TOTAL_BITS-1:0] r_sq_00, i_sq_00;
     wire signed [LOCAL_TOTAL_BITS-1:0] r_sq_01, i_sq_01;
-    wire signed [LOCAL_TOTAL_BITS-1:0] r_sq_10, i_sq_10;
+    wire signed [LOCAL_TOTAL_BITS-1:0] r_sq_10, i_sq_10; // Variabel yang benar
     wire signed [LOCAL_TOTAL_BITS-1:0] r_sq_11, i_sq_11;
 
     // Wires for final magnitude squared sums
@@ -66,12 +66,12 @@ module quantum_state_magnitudes(
     // Calculate magnitude squared for |10>
     fixed_mult r_10_sq_inst (.a(r_10), .b(r_10), .product(r_sq_10));
     fixed_mult i_10_sq_inst (.a(i_10), .b(i_10), .product(i_sq_10));
-    fixed_add sum_10_sq_inst (.a(r_10_sq), .b(i_10_sq), .sum(mag_sq_10_w));
+    fixed_add sum_10_sq_inst (.a(r_sq_10), .b(i_sq_10), .sum(mag_sq_10_w)); // --- Perbaikan: r_sq_10 dan i_sq_10 ---
 
     // Calculate magnitude squared for |11>
     fixed_mult r_11_sq_inst (.a(r_11), .b(r_11), .product(r_sq_11));
     fixed_mult i_11_sq_inst (.a(i_11), .b(i_11), .product(i_sq_11));
-    fixed_add sum_11_sq_inst (.a(r_11_sq), .b(i_11_sq), .sum(mag_sq_11_w));
+    fixed_add sum_11_sq_inst (.a(r_sq_11), .b(i_sq_11), .sum(mag_sq_11_w)); // --- Perbaikan: r_sq_11 dan i_sq_11 ---
 
     // Concatenate all magnitude squared outputs
     assign mag_sq_out = {mag_sq_00_w, mag_sq_01_w, mag_sq_10_w, mag_sq_11_w};
