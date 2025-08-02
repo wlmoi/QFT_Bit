@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Sat Aug  2 12:05:56 2025
+# Process ID         : 28176
+# Current directory  : D:/QFT_Bit/project_1/project_1.runs/impl_1
+# Command line       : vivado.exe -log quantum_state_magnitudes.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source quantum_state_magnitudes.tcl -notrace
+# Log file           : D:/QFT_Bit/project_1/project_1.runs/impl_1/quantum_state_magnitudes.vdi
+# Journal file       : D:/QFT_Bit/project_1/project_1.runs/impl_1\vivado.jou
+# Running On         : DESKTOP-3S5LN80
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26100
+# Processor Detail   : Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+# CPU Frequency      : 2592 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 17095 MB
+# Swap memory        : 26843 MB
+# Total Virtual      : 43938 MB
+# Available Virtual  : 9447 MB
+#-----------------------------------------------------------
+source quantum_state_magnitudes.tcl -notrace

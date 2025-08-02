@@ -13,18 +13,10 @@ module controlled_phase_gate(
     output signed [`TOTAL_BITS*2-1:0] target_q_out,
     
     // --- Port-port tambahan yang sebelumnya di dalam badan modul, sekarang dipindahkan ke sini ---
-    input wire control_bit,                               // Classical control signal (0 or 1) - 'logic' diubah menjadi 'wire'
+    input wire control_bit,                               // Classical control signal (0 or 1)
     input signed [`TOTAL_BITS*2-1:0] target_q_amplitude_in, // Target qubit's complex amplitude
     output signed [`TOTAL_BITS*2-1:0] target_q_amplitude_out // Output phase-shifted target
 );
-
-    // --- Variabel 'control_signal' dan deklarasi port di dalam badan modul yang bermasalah telah dihapus ---
-    // Baris-baris berikut yang mungkin ada di versi sebelumnya telah dihapus dari badan modul:
-    // logic control_signal; 
-    // input logic control_bit; 
-    // input signed [`TOTAL_BITS*2-1:0] target_q_amplitude_in; 
-    // output signed [`TOTAL_BITS*2-1:0] target_q_amplitude_out; 
-
 
     wire signed [`TOTAL_BITS-1:0] cos_val, sin_val;
     cos_sin_lut phase_lut (.angle_in(theta_angle), .cos_out(cos_val), .sin_out(sin_val));
