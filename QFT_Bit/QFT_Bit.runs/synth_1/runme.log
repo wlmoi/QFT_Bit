@@ -8,12 +8,12 @@
   **** SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Fri Aug  1 20:44:35 2025
+  **** Start of session at: Sat Aug  2 10:45:27 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source fixed_complelx_utils.tcl -notrace
-create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 495.336 ; gain = 210.797
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 496.938 ; gain = 211.477
 Command: synth_design -top fixed_complelx_utils -part xc7z020clg484-3
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
@@ -21,9 +21,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
 WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {17-179}  -suppress '. The existing rule will be replaced.
-INFO: [Synth 8-7075] Helper process launched with PID 34036
+INFO: [Synth 8-7075] Helper process launched with PID 34768
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1000.520 ; gain = 501.219
+Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1000.570 ; gain = 499.660
 ---------------------------------------------------------------------------------
 ERROR: [Synth 8-10632] declarations are not allowed in an unnamed block [D:/QFT_Bit/exp_lut_8_segment.v:53]
 ERROR: [Synth 8-10632] declarations are not allowed in an unnamed block [D:/QFT_Bit/exp_lut_8_segment.v:50]
@@ -31,15 +31,60 @@ INFO: [Synth 8-10285] module 'exp_lut_8_segment' is ignored due to previous erro
 INFO: [Synth 8-10285] module 'x_gate' is ignored due to previous errors [D:/QFT_Bit/x_gate.v:16]
 INFO: [Synth 8-10285] module 'qft_2_qubit' is ignored due to previous errors [D:/QFT_Bit/qft_2_qubit.v:80]
 INFO: [Synth 8-10285] module 'quantum_state_magnitudes' is ignored due to previous errors [D:/QFT_Bit/quantum_state_magnitudes.v:79]
-INFO: [Synth 8-10285] module 'qft_top_tb' is ignored due to previous errors [D:/QFT_Bit/qft_top_tb.v:241]
+INFO: [Synth 8-10285] module 'qft_top_tb' is ignored due to previous errors [D:/QFT_Bit/qft_top_tb.v:246]
 INFO: [Synth 8-9084] Verilog file 'D:/QFT_Bit/qft_top_tb.v' ignored due to errors
 ERROR: [Synth 8-12188] Failed to read verilog 'D:/QFT_Bit/qft_top_tb.v'
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 1101.312 ; gain = 602.012
+Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1100.590 ; gain = 599.680
 ---------------------------------------------------------------------------------
 synthesize failed
 INFO: [Common 17-83] Releasing license: Synthesis
 11 Infos, 1 Warnings, 0 Critical Warnings and 4 Errors encountered.
 synth_design failed
 ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
-INFO: [Common 17-206] Exiting Vivado at Fri Aug  1 20:44:57 2025...
+INFO: [Common 17-206] Exiting Vivado at Sat Aug  2 10:45:48 2025...
+
+*** Running vivado
+    with args -log fixed_complelx_utils.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source fixed_complelx_utils.tcl
+
+
+
+****** Vivado v2025.1 (64-bit)
+  **** SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+  **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+  **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+  **** Start of session at: Sat Aug  2 10:45:59 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source fixed_complelx_utils.tcl -notrace
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:07 . Memory (MB): peak = 496.945 ; gain = 212.840
+Command: synth_design -top fixed_complelx_utils -part xc7z020clg484-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {17-179}  -suppress '. The existing rule will be replaced.
+INFO: [Synth 8-7075] Helper process launched with PID 36832
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1001.008 ; gain = 500.070
+---------------------------------------------------------------------------------
+ERROR: [Synth 8-10632] declarations are not allowed in an unnamed block [D:/QFT_Bit/exp_lut_8_segment.v:53]
+ERROR: [Synth 8-10632] declarations are not allowed in an unnamed block [D:/QFT_Bit/exp_lut_8_segment.v:50]
+INFO: [Synth 8-10285] module 'exp_lut_8_segment' is ignored due to previous errors [D:/QFT_Bit/exp_lut_8_segment.v:71]
+INFO: [Synth 8-10285] module 'x_gate' is ignored due to previous errors [D:/QFT_Bit/x_gate.v:16]
+INFO: [Synth 8-10285] module 'qft_2_qubit' is ignored due to previous errors [D:/QFT_Bit/qft_2_qubit.v:80]
+INFO: [Synth 8-10285] module 'quantum_state_magnitudes' is ignored due to previous errors [D:/QFT_Bit/quantum_state_magnitudes.v:79]
+INFO: [Synth 8-10285] module 'qft_top_tb' is ignored due to previous errors [D:/QFT_Bit/qft_top_tb.v:246]
+INFO: [Synth 8-9084] Verilog file 'D:/QFT_Bit/qft_top_tb.v' ignored due to errors
+ERROR: [Synth 8-12188] Failed to read verilog 'D:/QFT_Bit/qft_top_tb.v'
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1101.086 ; gain = 600.148
+---------------------------------------------------------------------------------
+synthesize failed
+INFO: [Common 17-83] Releasing license: Synthesis
+11 Infos, 1 Warnings, 0 Critical Warnings and 4 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Sat Aug  2 10:46:19 2025...

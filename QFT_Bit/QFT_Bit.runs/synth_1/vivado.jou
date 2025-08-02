@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Fri Aug  1 20:44:35 2025
-# Process ID         : 29156
+# Start of session at: Sat Aug  2 10:45:59 2025
+# Process ID         : 4176
 # Current directory  : D:/QFT_Bit/QFT_Bit/QFT_Bit.runs/synth_1
 # Command line       : vivado.exe -log fixed_complelx_utils.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source fixed_complelx_utils.tcl
 # Log file           : D:/QFT_Bit/QFT_Bit/QFT_Bit.runs/synth_1/fixed_complelx_utils.vds
@@ -19,6 +19,6 @@
 # Host memory        : 17095 MB
 # Swap memory        : 26843 MB
 # Total Virtual      : 43938 MB
-# Available Virtual  : 10481 MB
+# Available Virtual  : 10192 MB
 #-----------------------------------------------------------
 source fixed_complelx_utils.tcl -notrace
