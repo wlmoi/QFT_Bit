@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Wed Aug 13 17:30:14 2025
+| Date         : Wed Aug 13 22:13:08 2025
 | Host         : DESKTOP-3S5LN80 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file qft3_top_pipelined_control_sets_placed.rpt
 | Design       : qft3_top_pipelined
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |     2 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |     1 |
+| Unused register locations in slices containing registers |     2 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -58,8 +58,8 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             232 |           29 |
-| No           | No                    | Yes                    |            1439 |          281 |
+| No           | No                    | No                     |             392 |           55 |
+| No           | No                    | Yes                    |            1178 |          209 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
@@ -73,8 +73,8 @@ Table of Contents
 +----------------+---------------+-------------------+------------------+----------------+--------------+
 |  Clock Signal  | Enable Signal |  Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------+---------------+-------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG |               |                   |               29 |            464 |        16.00 |
-|  clk_IBUF_BUFG |               | rst_n_IBUF_inst/O |              281 |           1439 |         5.12 |
+|  clk_IBUF_BUFG |               |                   |               55 |            784 |        14.25 |
+|  clk_IBUF_BUFG |               | rst_n_IBUF_inst/O |              209 |           1178 |         5.64 |
 +----------------+---------------+-------------------+------------------+----------------+--------------+
 
 

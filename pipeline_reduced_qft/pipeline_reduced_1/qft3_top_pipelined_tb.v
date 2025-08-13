@@ -1,3 +1,4 @@
+// qft3_top_pipelined_tb.v
 `timescale 1ns/1ps
 `include "fixed_point_params.vh"
 
@@ -30,11 +31,13 @@ module qft3_top_pipelined_tb;
 
     // --- Fixed-Point Constants for Test ---
     localparam S34_ONE = 16; // 1.0 in S3.4 format (1 * 2^4)
-    localparam S34_AMP = 6;  // Expected approximate amplitude of output components
+    localparam S34_AMP_NOMINAL = 6;  // Nominal expected approximate amplitude of output components (e.g., for 6.0)
+    localparam S34_AMP_TOLERANCE = 1; // Allowable deviation from nominal amplitude (e.g., +/- 1 bit)
     
     // --- UPDATED PIPELINE LATENCY ---
-    // Total latency = 6 stages * 3 cycles/stage (H/CROT) + 1 stage * 1 cycle/stage (SWAP) = 19
-    localparam PIPELINE_LATENCY = 19;
+    // Total latency = 1 (input registers) + 6 stages * 4 cycles/stage (H/CROT) + 1 stage * 1 cycle/stage (SWAP) = 1 + 24 + 1 = 26
+    // // FIX: Updated pipeline latency to 26 cycles to match the increased pipelining in the design modules.
+    localparam PIPELINE_LATENCY = 26;
 
     // Clock generator
     initial begin
@@ -60,6 +63,8 @@ module qft3_top_pipelined_tb;
         i110_r = S34_ONE;
 
         // Wait for the pipeline to fill and for the result to be ready
+        // // FIX: Increased latency by 1 for the new input stage. (This comment refers to the previous change,
+        // // but the key is that PIPELINE_LATENCY variable is now correct).
         repeat(PIPELINE_LATENCY + 2) @(posedge clk);
         
         $display("Checking output after %d cycles at time %t", PIPELINE_LATENCY, $time);
@@ -69,11 +74,13 @@ module qft3_top_pipelined_tb;
         $display("Final State:   [ (%d,%di), (%d,%di), (%d,%di), (%d,%di), (%d,%di), (%d,%di), (%d,%di), (%d,%di) ]",
                   f000_r,f000_i, f001_r,f001_i, f010_r,f010_i, f011_r,f011_i,
                   f100_r,f100_i, f101_r,f101_i, f110_r,f110_i, f111_r,f111_i);
-        $display("Expected State:  [ (6,0i), (0,-6i), (-6,0i), (0,6i), (6,0i), (0,-6i), (-6,0i), (0,6i) ] (approx.)");
+        $display("Expected State:  [ (6,0i), (0,-6i), (-6,0i), (0,6i), ... ]");
 
-        // Check against the expected S3.4 values, allowing for small rounding errors.
-        // The check verifies the phase relationship (1, -i, -1, i, ...) and that the amplitude is close to the expected value.
-        if (f000_r > (S34_AMP-2) && f001_i < (-S34_AMP+2) && f010_r < (-S34_AMP+2) && f011_i > (S34_AMP-2)) begin
+        // // UPDATED (BY WILL): More robust comparison for fixed-point values.
+        if ( (f000_r >= (S34_AMP_NOMINAL - S34_AMP_TOLERANCE) && f000_r <= (S34_AMP_NOMINAL + S34_AMP_TOLERANCE)) && (f000_i == 0) &&
+             (f001_r == 0) && (f001_i <= (-S34_AMP_NOMINAL + S34_AMP_TOLERANCE) && f001_i >= (-S34_AMP_NOMINAL - S34_AMP_TOLERANCE)) &&
+             (f010_r <= (-S34_AMP_NOMINAL + S34_AMP_TOLERANCE) && f010_r >= (-S34_AMP_NOMINAL - S34_AMP_TOLERANCE)) && (f010_i == 0) &&
+             (f011_r == 0) && (f011_i >= (S34_AMP_NOMINAL - S34_AMP_TOLERANCE) && f011_i <= (S34_AMP_NOMINAL + S34_AMP_TOLERANCE)) ) begin
             $display("\nResult: PASSED ✅");
         end else begin
             $display("\nResult: FAILED ❌");

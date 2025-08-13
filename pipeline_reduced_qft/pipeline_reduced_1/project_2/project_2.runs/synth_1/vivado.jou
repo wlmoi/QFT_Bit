@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Wed Aug 13 17:25:39 2025
-# Process ID         : 62220
+# Start of session at: Wed Aug 13 22:06:41 2025
+# Process ID         : 43184
 # Current directory  : D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/project_2/project_2.runs/synth_1
 # Command line       : vivado.exe -log qft3_top_pipelined.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source qft3_top_pipelined.tcl
 # Log file           : D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/project_2/project_2.runs/synth_1/qft3_top_pipelined.vds
@@ -19,6 +19,6 @@
 # Host memory        : 17095 MB
 # Swap memory        : 36346 MB
 # Total Virtual      : 53441 MB
-# Available Virtual  : 15185 MB
+# Available Virtual  : 10207 MB
 #-----------------------------------------------------------
 source qft3_top_pipelined.tcl -notrace

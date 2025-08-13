@@ -4,7 +4,7 @@
 //======================================================================
 // Complex-Complex Multiplier (Pipelined)
 //======================================================================
-// Latency: 3 cycles
+// Latency: 4 cycles
 module ccmult_pipelined(
     input                         clk,
     input                         rst_n,
@@ -41,19 +41,32 @@ module ccmult_pipelined(
         end
     end
 
-    // Pipeline Stage 3: scaling (output register)
-    reg signed [`TOTAL_WIDTH-1:0] pr_s3, pi_s3;
+    // Pipeline Stage 3: scaling
+    // // FIX: Renamed output registers of Stage 3 and added Stage 4
+    reg signed [`TOTAL_WIDTH-1:0] scaled_pr_s3, scaled_pi_s3;
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            pr_s3 <= 0;
-            pi_s3 <= 0;
+            scaled_pr_s3 <= 0;
+            scaled_pi_s3 <= 0;
         end else begin
-            pr_s3 <= real_sum_s2 >>> `FRAC_WIDTH;
-            pi_s3 <= imag_sum_s2 >>> `FRAC_WIDTH;
+            scaled_pr_s3 <= real_sum_s2 >>> `FRAC_WIDTH;
+            scaled_pi_s3 <= imag_sum_s2 >>> `FRAC_WIDTH;
+        end
+    end
+
+    // // FIX: Pipeline Stage 4: Output registers
+    reg signed [`TOTAL_WIDTH-1:0] pr_s4, pi_s4;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            pr_s4 <= 0;
+            pi_s4 <= 0;
+        end else begin
+            pr_s4 <= scaled_pr_s3;
+            pi_s4 <= scaled_pi_s3;
         end
     end
     
-    assign pr = pr_s3;
-    assign pi = pi_s3;
+    assign pr = pr_s4;
+    assign pi = pi_s4;
     
 endmodule

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Wed Aug 13 17:27:53 2025
+| Date         : Wed Aug 13 22:10:05 2025
 | Host         : DESKTOP-3S5LN80 running 64-bit major release  (build 9200)
 | Command      : report_drc -file qft3_top_pipelined_drc_opted.rpt -pb qft3_top_pipelined_drc_opted.pb -rpx qft3_top_pipelined_drc_opted.rpx
 | Design       : qft3_top_pipelined

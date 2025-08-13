@@ -17,7 +17,6 @@ module h_gate_simplified(
     localparam signed [`TOTAL_WIDTH-1:0] ONE_OVER_SQRT2 = 11;
 
     // --- Pipeline Stage 1: Addition/Subtraction ---
-    // // FIX: Use `ADD_WIDTH` for intermediate addition/subtraction to prevent overflow.
     reg signed [`ADD_WIDTH-1:0] add_r_s1, add_i_s1;
     reg signed [`ADD_WIDTH-1:0] sub_r_s1, sub_i_s1;
 
@@ -34,7 +33,6 @@ module h_gate_simplified(
     end
 
     // --- Pipeline Stage 2: Multiplication by 1/sqrt(2) ---
-    // // FIX: Use `MULT_WIDTH` for intermediate multiplication results to prevent overflow.
     localparam H_MULT_WIDTH = `ADD_WIDTH + `TOTAL_WIDTH; 
     reg signed [H_MULT_WIDTH-1:0] mult_add_r_s2, mult_add_i_s2;
     reg signed [H_MULT_WIDTH-1:0] mult_sub_r_s2, mult_sub_i_s2;
@@ -44,7 +42,6 @@ module h_gate_simplified(
             mult_add_r_s2 <= 0; mult_add_i_s2 <= 0;
             mult_sub_r_s2 <= 0; mult_sub_i_s2 <= 0;
         end else begin
-            // Perform multiplication on the FULL adder result to prevent overflow.
             mult_add_r_s2 <= add_r_s1 * ONE_OVER_SQRT2;
             mult_add_i_s2 <= add_i_s1 * ONE_OVER_SQRT2;
             mult_sub_r_s2 <= sub_r_s1 * ONE_OVER_SQRT2;
@@ -52,26 +49,42 @@ module h_gate_simplified(
         end
     end
 
-    // --- Pipeline Stage 3: Scaling (Output) ---
-    reg signed [`TOTAL_WIDTH-1:0] new_alpha_r_s3, new_alpha_i_s3;
-    reg signed [`TOTAL_WIDTH-1:0] new_beta_r_s3,  new_beta_i_s3;
+    // --- Pipeline Stage 3: Scaling ---
+    // // FIX: Renamed output registers of Stage 3 and added Stage 4
+    reg signed [`TOTAL_WIDTH-1:0] scaled_alpha_r_s3, scaled_alpha_i_s3;
+    reg signed [`TOTAL_WIDTH-1:0] scaled_beta_r_s3,  scaled_beta_i_s3;
     
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            new_alpha_r_s3 <= 0; new_alpha_i_s3 <= 0;
-            new_beta_r_s3  <= 0; new_beta_i_s3  <= 0;
+            scaled_alpha_r_s3 <= 0; scaled_alpha_i_s3 <= 0;
+            scaled_beta_r_s3  <= 0; scaled_beta_i_s3  <= 0;
         end else begin
-            // Scale the wider product back down to the target width
-            new_alpha_r_s3 <= mult_add_r_s2 >>> `FRAC_WIDTH;
-            new_alpha_i_s3 <= mult_add_i_s2 >>> `FRAC_WIDTH;
-            new_beta_r_s3  <= mult_sub_r_s2 >>> `FRAC_WIDTH;
-            new_beta_i_s3  <= mult_sub_i_s2 >>> `FRAC_WIDTH;
+            scaled_alpha_r_s3 <= mult_add_r_s2 >>> `FRAC_WIDTH;
+            scaled_alpha_i_s3 <= mult_add_i_s2 >>> `FRAC_WIDTH;
+            scaled_beta_r_s3  <= mult_sub_r_s2 >>> `FRAC_WIDTH;
+            scaled_beta_i_s3  <= mult_sub_i_s2 >>> `FRAC_WIDTH;
+        end
+    end
+
+    // // FIX: Pipeline Stage 4: Output Registers
+    reg signed [`TOTAL_WIDTH-1:0] new_alpha_r_s4, new_alpha_i_s4;
+    reg signed [`TOTAL_WIDTH-1:0] new_beta_r_s4,  new_beta_i_s4;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            new_alpha_r_s4 <= 0; new_alpha_i_s4 <= 0;
+            new_beta_r_s4  <= 0; new_beta_i_s4  <= 0;
+        end else begin
+            new_alpha_r_s4 <= scaled_alpha_r_s3;
+            new_alpha_i_s4 <= scaled_alpha_i_s3;
+            new_beta_r_s4  <= scaled_beta_r_s3;
+            new_beta_i_s4  <= scaled_beta_i_s3;
         end
     end
     
-    assign new_alpha_r = new_alpha_r_s3;
-    assign new_alpha_i = new_alpha_i_s3;
-    assign new_beta_r   = new_beta_r_s3;
-    assign new_beta_i  = new_beta_i_s3;
+    assign new_alpha_r = new_alpha_r_s4;
+    assign new_alpha_i = new_alpha_i_s4;
+    assign new_beta_r  = new_beta_r_s4;
+    assign new_beta_i  = new_beta_i_s4;
     
 endmodule

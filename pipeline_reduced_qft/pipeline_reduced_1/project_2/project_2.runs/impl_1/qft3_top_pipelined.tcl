@@ -110,7 +110,7 @@ set rc [catch {
   set_param power.enableUnconnectedCarry8PinPower 1
   set_param power.enableCarry8RouteBelPower 1
   set_param power.enableLutRouteBelPower 1
-  set_param runs.launchOptions { -jobs 7  }
+  set_param runs.launchOptions { -jobs 2  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xczu7ev-ffvf1517-1LV-i
   set_property design_mode GateLvl [current_fileset]

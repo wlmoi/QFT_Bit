@@ -26,7 +26,8 @@ module qft3_top_pipelined(
     localparam signed [`TOTAL_WIDTH-1:0] C_PI_4_I = 11;
 
     // --- Latency Definition ---
-    localparam STAGE_LATENCY = 3; // Latency per Hadamard/CROT stage
+    // // FIX: Increased latency per stage to 4 cycles.
+    localparam STAGE_LATENCY = 4; // Latency per Hadamard/CROT stage
 
     // --- Intermediate Wires for Pipeline Stages ---
     wire signed [`TOTAL_WIDTH-1:0] s1_r[0:7], s1_i[0:7];
@@ -57,19 +58,19 @@ module qft3_top_pipelined(
         end
     end
 
-    // --- STAGE 1: H on q2 (bit 2) --- Latency: 3 ---
+    // --- STAGE 1: H on q2 (bit 2) --- Latency: 4 ---
     // // FIX: Connect to the newly added input stage registers (r_iXXX_r/i).
     h_gate_simplified h_q2_p0 (.clk(clk), .rst_n(rst_n), .alpha_r(r_i000_r), .alpha_i(r_i000_i), .beta_r(r_i100_r), .beta_i(r_i100_i), .new_alpha_r(s1_r[0]), .new_alpha_i(s1_i[0]), .new_beta_r(s1_r[4]), .new_beta_i(s1_i[4]));
     h_gate_simplified h_q2_p1 (.clk(clk), .rst_n(rst_n), .alpha_r(r_i001_r), .alpha_i(r_i001_i), .beta_r(r_i101_r), .beta_i(r_i101_i), .new_alpha_r(s1_r[1]), .new_alpha_i(s1_i[1]), .new_beta_r(s1_r[5]), .new_beta_i(s1_i[5]));
     h_gate_simplified h_q2_p2 (.clk(clk), .rst_n(rst_n), .alpha_r(r_i010_r), .alpha_i(r_i010_i), .beta_r(r_i110_r), .beta_i(r_i110_i), .new_alpha_r(s1_r[2]), .new_alpha_i(s1_i[2]), .new_beta_r(s1_r[6]), .new_beta_i(s1_i[6]));
     h_gate_simplified h_q2_p3 (.clk(clk), .rst_n(rst_n), .alpha_r(r_i011_r), .alpha_i(r_i011_i), .beta_r(r_i111_r), .beta_i(r_i111_i), .new_alpha_r(s1_r[3]), .new_alpha_i(s1_i[3]), .new_beta_r(s1_r[7]), .new_beta_i(s1_i[7]));
 
-    // --- STAGE 2: CROT(π/2) from q1 to q2 --- Latency: 3 ---
+    // --- STAGE 2: CROT(π/2) from q1 to q2 --- Latency: 4 ---
     ccmult_pipelined c21_p0 (.clk(clk), .rst_n(rst_n), .ar(s1_r[6]), .ai(s1_i[6]), .br(C_PI_2_R), .bi(C_PI_2_I), .pr(s2_r[6]), .pi(s2_i[6]));
     ccmult_pipelined c21_p1 (.clk(clk), .rst_n(rst_n), .ar(s1_r[7]), .ai(s1_i[7]), .br(C_PI_2_R), .bi(C_PI_2_I), .pr(s2_r[7]), .pi(s2_i[7]));
 
     // // FIX: Renamed pass-through registers to avoid potential iverilog confusion and ensure clean compilation.
-    // Pass-through with 3-cycle delay
+    // Pass-through with 4-cycle delay
     reg signed [`TOTAL_WIDTH-1:0] delayed_s1_s2_r [0:5][STAGE_LATENCY-1:0];
     reg signed [`TOTAL_WIDTH-1:0] delayed_s1_s2_i [0:5][STAGE_LATENCY-1:0];
     always @(posedge clk or negedge rst_n) begin
@@ -101,12 +102,12 @@ module qft3_top_pipelined(
     assign s2_r[4] = delayed_s1_s2_r[4][STAGE_LATENCY-1]; assign s2_i[4] = delayed_s1_s2_i[4][STAGE_LATENCY-1];
     assign s2_r[5] = delayed_s1_s2_r[5][STAGE_LATENCY-1]; assign s2_i[5] = delayed_s1_s2_i[5][STAGE_LATENCY-1];
 
-    // --- STAGE 3: CROT(π/4) from q0 to q2 --- Latency: 3 ---
+    // --- STAGE 3: CROT(π/4) from q0 to q2 --- Latency: 4 ---
     ccmult_pipelined c20_p0 (.clk(clk), .rst_n(rst_n), .ar(s2_r[5]), .ai(s2_i[5]), .br(C_PI_4_R), .bi(C_PI_4_I), .pr(s3_r[5]), .pi(s3_i[5]));
     ccmult_pipelined c20_p1 (.clk(clk), .rst_n(rst_n), .ar(s2_r[7]), .ai(s2_i[7]), .br(C_PI_4_R), .bi(C_PI_4_I), .pr(s3_r[7]), .pi(s3_i[7]));
 
     // // FIX: Renamed pass-through registers to avoid potential iverilog confusion and ensure clean compilation.
-    // Pass-through with 3-cycle delay
+    // Pass-through with 4-cycle delay
     reg signed [`TOTAL_WIDTH-1:0] delayed_s2_s3_r [0:5][STAGE_LATENCY-1:0];
     reg signed [`TOTAL_WIDTH-1:0] delayed_s2_s3_i [0:5][STAGE_LATENCY-1:0];
     always @(posedge clk or negedge rst_n) begin
@@ -138,18 +139,18 @@ module qft3_top_pipelined(
     assign s3_r[4] = delayed_s2_s3_r[4][STAGE_LATENCY-1]; assign s3_i[4] = delayed_s2_s3_i[4][STAGE_LATENCY-1];
     assign s3_r[6] = delayed_s2_s3_r[5][STAGE_LATENCY-1]; assign s3_i[6] = delayed_s2_s3_i[5][STAGE_LATENCY-1]; // This is where s3_r[6] receives from delayed_s2_s3_r[5].
 
-    // --- STAGE 4: H on q1 (bit 1) --- Latency: 3 ---
+    // --- STAGE 4: H on q1 (bit 1) --- Latency: 4 ---
     h_gate_simplified h_q1_p0 (.clk(clk), .rst_n(rst_n), .alpha_r(s3_r[0]), .alpha_i(s3_i[0]), .beta_r(s3_r[2]), .beta_i(s3_i[2]), .new_alpha_r(s4_r[0]), .new_alpha_i(s4_i[0]), .new_beta_r(s4_r[2]), .new_beta_i(s4_i[2]));
     h_gate_simplified h_q1_p1 (.clk(clk), .rst_n(rst_n), .alpha_r(s3_r[1]), .alpha_i(s3_i[1]), .beta_r(s3_r[3]), .beta_i(s3_i[3]), .new_alpha_r(s4_r[1]), .new_alpha_i(s4_i[1]), .new_beta_r(s4_r[3]), .new_beta_i(s4_i[3]));
     h_gate_simplified h_q1_p2 (.clk(clk), .rst_n(rst_n), .alpha_r(s3_r[4]), .alpha_i(s3_i[4]), .beta_r(s3_r[6]), .beta_i(s3_i[6]), .new_alpha_r(s4_r[4]), .new_alpha_i(s4_i[4]), .new_beta_r(s4_r[6]), .new_beta_i(s4_i[6]));
     h_gate_simplified h_q1_p3 (.clk(clk), .rst_n(rst_n), .alpha_r(s3_r[5]), .alpha_i(s3_i[5]), .beta_r(s3_r[7]), .beta_i(s3_i[7]), .new_alpha_r(s4_r[5]), .new_alpha_i(s4_i[5]), .new_beta_r(s4_r[7]), .new_beta_i(s4_i[7]));
 
-    // --- STAGE 5: CROT(π/2) from q0 to q1 --- Latency: 3 ---
+    // --- STAGE 5: CROT(π/2) from q0 to q1 --- Latency: 4 ---
     ccmult_pipelined c10_p0 (.clk(clk), .rst_n(rst_n), .ar(s4_r[3]), .ai(s4_i[3]), .br(C_PI_2_R), .bi(C_PI_2_I), .pr(s5_r[3]), .pi(s5_i[3]));
     ccmult_pipelined c10_p1 (.clk(clk), .rst_n(rst_n), .ar(s4_r[7]), .ai(s4_i[7]), .br(C_PI_2_R), .bi(C_PI_2_I), .pr(s5_r[7]), .pi(s5_i[7]));
 
     // // FIX: Renamed pass-through registers to avoid potential iverilog confusion and ensure clean compilation.
-    // Pass-through with 3-cycle delay
+    // Pass-through with 4-cycle delay
     reg signed [`TOTAL_WIDTH-1:0] delayed_s4_s5_r [0:5][STAGE_LATENCY-1:0];
     reg signed [`TOTAL_WIDTH-1:0] delayed_s4_s5_i [0:5][STAGE_LATENCY-1:0];
     always @(posedge clk or negedge rst_n) begin
@@ -181,7 +182,7 @@ module qft3_top_pipelined(
     assign s5_r[5] = delayed_s4_s5_r[4][STAGE_LATENCY-1]; assign s5_i[5] = delayed_s4_s5_i[4][STAGE_LATENCY-1];
     assign s5_r[6] = delayed_s4_s5_r[5][STAGE_LATENCY-1]; assign s5_i[6] = delayed_s4_s5_i[5][STAGE_LATENCY-1];
 
-    // --- STAGE 6: H on q0 (bit 0) --- Latency: 3 ---
+    // --- STAGE 6: H on q0 (bit 0) --- Latency: 4 ---
     h_gate_simplified h_q0_p0 (.clk(clk), .rst_n(rst_n), .alpha_r(s5_r[0]), .alpha_i(s5_i[0]), .beta_r(s5_r[1]), .beta_i(s5_i[1]), .new_alpha_r(s6_r[0]), .new_alpha_i(s6_i[0]), .new_beta_r(s6_r[1]), .new_beta_i(s6_i[1]));
     h_gate_simplified h_q0_p1 (.clk(clk), .rst_n(rst_n), .alpha_r(s5_r[2]), .alpha_i(s5_i[2]), .beta_r(s5_r[3]), .beta_i(s5_i[3]), .new_alpha_r(s6_r[2]), .new_alpha_i(s6_i[2]), .new_beta_r(s6_r[3]), .new_beta_i(s6_i[3]));
     h_gate_simplified h_q0_p2 (.clk(clk), .rst_n(rst_n), .alpha_r(s5_r[4]), .alpha_i(s5_i[4]), .beta_r(s5_r[5]), .beta_i(s5_i[5]), .new_alpha_r(s6_r[4]), .new_alpha_i(s6_i[4]), .new_beta_r(s6_r[5]), .new_beta_i(s6_i[5]));
