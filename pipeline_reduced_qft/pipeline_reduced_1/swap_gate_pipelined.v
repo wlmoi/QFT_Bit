@@ -1,9 +1,9 @@
+// swap_gate_pipelined.v
 `include "fixed_point_params.vh"
 
 //======================================================================
 // SWAP Gate (Pipelined)
 //======================================================================
-// This module is retained as-is.
 // Latency: 1 cycle
 module swap_gate_pipelined(
     input                         clk,

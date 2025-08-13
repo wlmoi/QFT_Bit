@@ -1,9 +1,9 @@
+// ccmult_pipelined.v
 `include "fixed_point_params.vh"
 
 //======================================================================
 // Complex-Complex Multiplier (Pipelined)
 //======================================================================
-// This module is retained as it is used for the CROT gates.
 // Latency: 3 cycles
 module ccmult_pipelined(
     input                         clk,
@@ -30,7 +30,7 @@ module ccmult_pipelined(
     end
 
     // Pipeline Stage 2: addition/subtraction
-    reg signed [`MULT_WIDTH:0] real_sum_s2, imag_sum_s2;
+    reg signed [`MULT_WIDTH:0] real_sum_s2, imag_sum_s2; // Increased width for addition result
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             real_sum_s2 <= 0;

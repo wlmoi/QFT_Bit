@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Tue Aug 12 16:04:28 2025
-# Process ID         : 66048
+# Start of session at: Tue Aug 12 20:20:35 2025
+# Process ID         : 11756
 # Current directory  : D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/project_1/project_1.runs/synth_1
 # Command line       : vivado.exe -log qft3_top_pipelined_tb.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source qft3_top_pipelined_tb.tcl
 # Log file           : D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/project_1/project_1.runs/synth_1/qft3_top_pipelined_tb.vds
@@ -19,10 +19,10 @@
 # Host memory        : 17095 MB
 # Swap memory        : 36346 MB
 # Total Virtual      : 53441 MB
-# Available Virtual  : 22830 MB
+# Available Virtual  : 19104 MB
 #-----------------------------------------------------------
 source qft3_top_pipelined_tb.tcl -notrace
-create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 495.359 ; gain = 211.957
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 495.930 ; gain = 209.277
 Command: synth_design -top qft3_top_pipelined_tb -part xc7vx485tffg1157-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7vx485t'
@@ -33,4 +33,4 @@ synth_design failed
 ERROR: [Common 17-345] A valid license was not found for feature 'Synthesis' and/or device 'xc7vx485t'. Please run the Vivado License Manager for assistance in determining
 which features and devices are licensed for your system.
 Resolution: Check the status of your licenses in the Vivado License Manager. For debug help search Xilinx Support for "Licensing FAQ". If you are using a license server, verify that the license server is up and running a version of the xilinx daemon that is compatible with the version of Xilinx software that you are using. Note: Vivado 2021.1 and later versions require upgrading your license server tools to the Flex 11.17.2.0 versions. Please confirm with your license admin that the correct version of the license server tools are installed.
-INFO: [Common 17-206] Exiting Vivado at Tue Aug 12 16:04:39 2025...
+INFO: [Common 17-206] Exiting Vivado at Tue Aug 12 20:20:44 2025...

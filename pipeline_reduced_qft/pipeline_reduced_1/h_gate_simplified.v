@@ -1,3 +1,4 @@
+// h_gate_simplified.v
 `include "fixed_point_params.vh"
 
 //======================================================================
@@ -12,10 +13,11 @@ module h_gate_simplified(
     output signed [`TOTAL_WIDTH-1:0] new_beta_r,  new_beta_i
 );
 
-    // S3.4 constant for 1/sqrt(2)
+    // S3.4 constant for 1/sqrt(2) (0.707 * 2^4 = 11.312, dibulatkan ke 11)
     localparam signed [`TOTAL_WIDTH-1:0] ONE_OVER_SQRT2 = 11;
 
     // --- Pipeline Stage 1: Addition/Subtraction ---
+    // // FIX: Use `ADD_WIDTH` for intermediate addition/subtraction to prevent overflow.
     reg signed [`ADD_WIDTH-1:0] add_r_s1, add_i_s1;
     reg signed [`ADD_WIDTH-1:0] sub_r_s1, sub_i_s1;
 
@@ -32,8 +34,8 @@ module h_gate_simplified(
     end
 
     // --- Pipeline Stage 2: Multiplication by 1/sqrt(2) ---
-    // Define a wider intermediate product width to prevent overflow
-    localparam H_MULT_WIDTH = `ADD_WIDTH + `TOTAL_WIDTH;
+    // // FIX: Use `MULT_WIDTH` for intermediate multiplication results to prevent overflow.
+    localparam H_MULT_WIDTH = `ADD_WIDTH + `TOTAL_WIDTH; 
     reg signed [H_MULT_WIDTH-1:0] mult_add_r_s2, mult_add_i_s2;
     reg signed [H_MULT_WIDTH-1:0] mult_sub_r_s2, mult_sub_i_s2;
 
@@ -42,8 +44,7 @@ module h_gate_simplified(
             mult_add_r_s2 <= 0; mult_add_i_s2 <= 0;
             mult_sub_r_s2 <= 0; mult_sub_i_s2 <= 0;
         end else begin
-            // --- THE FIX ---
-            // Perform multiplication on the FULL 9-bit adder result to prevent overflow.
+            // Perform multiplication on the FULL adder result to prevent overflow.
             mult_add_r_s2 <= add_r_s1 * ONE_OVER_SQRT2;
             mult_add_i_s2 <= add_i_s1 * ONE_OVER_SQRT2;
             mult_sub_r_s2 <= sub_r_s1 * ONE_OVER_SQRT2;
@@ -70,7 +71,7 @@ module h_gate_simplified(
     
     assign new_alpha_r = new_alpha_r_s3;
     assign new_alpha_i = new_alpha_i_s3;
-    assign new_beta_r  = new_beta_r_s3;
+    assign new_beta_r   = new_beta_r_s3;
     assign new_beta_i  = new_beta_i_s3;
     
 endmodule
