@@ -2,9 +2,9 @@
 
 # -------------------------------------------------------------------------------------------------
 # // Primary Clock Definition
-# // Defines a 100 MHz clock (10 ns period) on the 'clk' input port of the top module.
+# // Defines a 1000 MHz clock (1 ns period) on the 'clk' input port of the top module.
 # -------------------------------------------------------------------------------------------------
-create_clock -period 10.000 -name sys_clk [get_ports clk]
+create_clock -period 1.000 -name sys_clk [get_ports clk]
 
 # -------------------------------------------------------------------------------------------------
 # // Input Delay Constraints for Data Inputs

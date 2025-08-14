@@ -3,10 +3,11 @@
 //======================================================================
 // Complex-Complex Multiplier (Pipelined)
 //======================================================================
-// Latency: 4 cycles
+// This module is retained as it is used for the CROT gates.
+// Latency: 3 cycles
 module ccmult_pipelined(
     input                         clk,
-    input                         rst_n, // This will now receive the synchronized reset
+    input                         rst_n,
     input  signed [`TOTAL_WIDTH-1:0] ar, ai,
     input  signed [`TOTAL_WIDTH-1:0] br, bi,
     output signed [`TOTAL_WIDTH-1:0] pr, pi
@@ -14,7 +15,7 @@ module ccmult_pipelined(
 
     // Pipeline Stage 1: multiplication
     reg signed [`MULT_WIDTH-1:0] p_ar_br_s1, p_ai_bi_s1, p_ar_bi_s1, p_ai_br_s1;
-    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
+    always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             p_ar_br_s1 <= 0;
             p_ai_bi_s1 <= 0;
@@ -29,8 +30,8 @@ module ccmult_pipelined(
     end
 
     // Pipeline Stage 2: addition/subtraction
-    reg signed [`MULT_WIDTH:0] real_sum_s2, imag_sum_s2; // Increased width for addition result
-    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
+    reg signed [`MULT_WIDTH:0] real_sum_s2, imag_sum_s2;
+    always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             real_sum_s2 <= 0;
             imag_sum_s2 <= 0;
@@ -40,31 +41,19 @@ module ccmult_pipelined(
         end
     end
 
-    // Pipeline Stage 3: scaling
-    reg signed [`TOTAL_WIDTH-1:0] scaled_pr_s3, scaled_pi_s3;
-    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
+    // Pipeline Stage 3: scaling (output register)
+    reg signed [`TOTAL_WIDTH-1:0] pr_s3, pi_s3;
+    always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            scaled_pr_s3 <= 0;
-            scaled_pi_s3 <= 0;
+            pr_s3 <= 0;
+            pi_s3 <= 0;
         end else begin
-            scaled_pr_s3 <= real_sum_s2 >>> `FRAC_WIDTH;
-            scaled_pi_s3 <= imag_sum_s2 >>> `FRAC_WIDTH;
-        end
-    end
-
-    // Pipeline Stage 4: Output registers
-    reg signed [`TOTAL_WIDTH-1:0] pr_s4, pi_s4;
-    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
-        if (!rst_n) begin
-            pr_s4 <= 0;
-            pi_s4 <= 0;
-        end else begin
-            pr_s4 <= scaled_pr_s3;
-            pi_s4 <= scaled_pi_s3;
+            pr_s3 <= real_sum_s2 >>> `FRAC_WIDTH;
+            pi_s3 <= imag_sum_s2 >>> `FRAC_WIDTH;
         end
     end
     
-    assign pr = pr_s4;
-    assign pi = pi_s4;
+    assign pr = pr_s3;
+    assign pi = pi_s3;
     
 endmodule
