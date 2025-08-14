@@ -2,10 +2,10 @@
 
 # -------------------------------------------------------------------------------------------------
 # // Primary Clock Definition
-# // Defines a 200 MHz clock (5 ns period) on the 'clk' input port of the top module.
+# // Defines a 50 MHz clock (20 ns period) on the 'clk' input port of the top module.
 # // This is a more realistic frequency target for complex arithmetic circuits.
 # -------------------------------------------------------------------------------------------------
-create_clock -period 5.000 -name sys_clk [get_ports clk]
+create_clock -period 20.000 -name sys_clk [get_ports clk]
 
 # -------------------------------------------------------------------------------------------------
 # // Input Delay Constraints for Data Inputs

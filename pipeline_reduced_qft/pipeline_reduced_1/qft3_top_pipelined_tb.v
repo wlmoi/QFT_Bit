@@ -34,11 +34,9 @@ module qft3_top_pipelined_tb;
     localparam S34_TOL = 2; // Tolerance for fixed-point comparisons (+/- 2 LSB)
     
     // --- UPDATED PIPELINE LATENCY ---
-    // Total latency = (Max_stage_latency * Number_of_pipelined_stages_in_QFT) + Swap_gate_latency
-    // QFT has 6 pipelined stages (3 H-gates, 3 CROT-gates), each aligned to max latency of 7 cycles.
-    // Plus the final SWAP gate which has 1 cycle latency.
-    localparam PIPELINE_LATENCY = (6 * 7) + 1; // 42 + 1 = 43 cycles.
-    
+    // Total latency = 6 stages * 10 cycles/stage (H/CROT max latency) + 1 stage * 1 cycle/stage (SWAP) = 60 + 1 = 61
+    localparam PIPELINE_LATENCY = 61; // CRITICAL CHANGE: Updated to 61 cycles
+
     // Clock generator
     initial begin
         clk = 0;

@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2025.1
-| Date         : Thu Aug 14 15:53:45 2025
+| Date         : Thu Aug 14 16:36:20 2025
 | Host         : DESKTOP-3S5LN80
 | Design       : design_1
 | Device       : xczu7eg-ffvf1517-1LV-I-
@@ -19,6 +19,7 @@ Number of global clocks: 1
 	Number of BUFG_GT: 0
 	Number of BUFG_PS: 0
 	Number of BUFG_FABRIC: 0
+	Running suboptimal placement checker for 1 clocks (and their loads) which do not have the CLOCK_LOW_FANOUT property but have a fanout less than 2000...
 Pre-CRP Checker took 0 secs
 
 ********************************
@@ -26,8 +27,8 @@ Clock Net Route Info (CRP Input)
 ********************************
 Clock 1: clk_IBUF_BUFG
 	Clock source type: BUFGCE
-	Clock source region: X2Y1
-	initial rect ((1, 1), (3, 5))
+	Clock source region: X2Y5
+	initial rect ((1, 3), (2, 5))
 
 
 
