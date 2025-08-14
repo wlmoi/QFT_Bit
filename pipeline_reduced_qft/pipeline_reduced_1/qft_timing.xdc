@@ -24,8 +24,8 @@ set_input_delay -clock sys_clk -min 0.000 [get_ports rst_n]
 # // Output Delay Constraints
 # // Defines the maximum and minimum delays for signals leaving the FPGA's output pins
 # // relative to the clock edge.
-# // If setup violations persist on output paths, you may need to increase the -max value
-# // after verifying allowed delay with the external receiving device.
+# # If setup violations persist on output paths, you may need to increase the -max value
+# # after verifying allowed delay with the external receiving device.
 # -------------------------------------------------------------------------------------------------
 set_output_delay -clock sys_clk -max 1.000 [get_ports {f*_r f*_i}]
 set_output_delay -clock sys_clk -min 0.000 [get_ports {f*_r f*_i}]

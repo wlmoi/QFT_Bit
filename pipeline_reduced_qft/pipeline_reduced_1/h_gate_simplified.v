@@ -1,4 +1,3 @@
-// h_gate_simplified.v
 `include "fixed_point_params.vh"
 
 //======================================================================
@@ -6,7 +5,7 @@
 //======================================================================
 module h_gate_simplified(
     input                         clk,
-    input                         rst_n,
+    input                         rst_n, // This will now receive the synchronized reset
     input  signed [`TOTAL_WIDTH-1:0] alpha_r, alpha_i,
     input  signed [`TOTAL_WIDTH-1:0] beta_r,  beta_i,
     output signed [`TOTAL_WIDTH-1:0] new_alpha_r, new_alpha_i,
@@ -20,7 +19,7 @@ module h_gate_simplified(
     reg signed [`ADD_WIDTH-1:0] add_r_s1, add_i_s1;
     reg signed [`ADD_WIDTH-1:0] sub_r_s1, sub_i_s1;
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             add_r_s1 <= 0; add_i_s1 <= 0;
             sub_r_s1 <= 0; sub_i_s1 <= 0;
@@ -37,7 +36,7 @@ module h_gate_simplified(
     reg signed [H_MULT_WIDTH-1:0] mult_add_r_s2, mult_add_i_s2;
     reg signed [H_MULT_WIDTH-1:0] mult_sub_r_s2, mult_sub_i_s2;
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             mult_add_r_s2 <= 0; mult_add_i_s2 <= 0;
             mult_sub_r_s2 <= 0; mult_sub_i_s2 <= 0;
@@ -50,11 +49,10 @@ module h_gate_simplified(
     end
 
     // --- Pipeline Stage 3: Scaling ---
-    // // FIX: Renamed output registers of Stage 3 and added Stage 4
     reg signed [`TOTAL_WIDTH-1:0] scaled_alpha_r_s3, scaled_alpha_i_s3;
     reg signed [`TOTAL_WIDTH-1:0] scaled_beta_r_s3,  scaled_beta_i_s3;
     
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             scaled_alpha_r_s3 <= 0; scaled_alpha_i_s3 <= 0;
             scaled_beta_r_s3  <= 0; scaled_beta_i_s3  <= 0;
@@ -66,11 +64,11 @@ module h_gate_simplified(
         end
     end
 
-    // // FIX: Pipeline Stage 4: Output Registers
+    // Pipeline Stage 4: Output Registers
     reg signed [`TOTAL_WIDTH-1:0] new_alpha_r_s4, new_alpha_i_s4;
     reg signed [`TOTAL_WIDTH-1:0] new_beta_r_s4,  new_beta_i_s4;
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             new_alpha_r_s4 <= 0; new_alpha_i_s4 <= 0;
             new_beta_r_s4  <= 0; new_beta_i_s4  <= 0;

@@ -1,4 +1,3 @@
-// ccmult_pipelined.v
 `include "fixed_point_params.vh"
 
 //======================================================================
@@ -7,7 +6,7 @@
 // Latency: 4 cycles
 module ccmult_pipelined(
     input                         clk,
-    input                         rst_n,
+    input                         rst_n, // This will now receive the synchronized reset
     input  signed [`TOTAL_WIDTH-1:0] ar, ai,
     input  signed [`TOTAL_WIDTH-1:0] br, bi,
     output signed [`TOTAL_WIDTH-1:0] pr, pi
@@ -15,7 +14,7 @@ module ccmult_pipelined(
 
     // Pipeline Stage 1: multiplication
     reg signed [`MULT_WIDTH-1:0] p_ar_br_s1, p_ai_bi_s1, p_ar_bi_s1, p_ai_br_s1;
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             p_ar_br_s1 <= 0;
             p_ai_bi_s1 <= 0;
@@ -31,7 +30,7 @@ module ccmult_pipelined(
 
     // Pipeline Stage 2: addition/subtraction
     reg signed [`MULT_WIDTH:0] real_sum_s2, imag_sum_s2; // Increased width for addition result
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             real_sum_s2 <= 0;
             imag_sum_s2 <= 0;
@@ -42,9 +41,8 @@ module ccmult_pipelined(
     end
 
     // Pipeline Stage 3: scaling
-    // // FIX: Renamed output registers of Stage 3 and added Stage 4
     reg signed [`TOTAL_WIDTH-1:0] scaled_pr_s3, scaled_pi_s3;
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             scaled_pr_s3 <= 0;
             scaled_pi_s3 <= 0;
@@ -54,9 +52,9 @@ module ccmult_pipelined(
         end
     end
 
-    // // FIX: Pipeline Stage 4: Output registers
+    // Pipeline Stage 4: Output registers
     reg signed [`TOTAL_WIDTH-1:0] pr_s4, pi_s4;
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge clk) begin // MODIFIED: Only sensitive to posedge clk, use synchronized reset
         if (!rst_n) begin
             pr_s4 <= 0;
             pi_s4 <= 0;
