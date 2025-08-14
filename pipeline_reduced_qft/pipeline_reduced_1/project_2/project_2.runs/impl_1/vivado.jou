@@ -21,3 +21,4 @@
 # Total Virtual      : 53441 MB
 # Available Virtual  : 10130 MB
 #-----------------------------------------------------------
+source qft3_top_pipelined.tcl -notrace
