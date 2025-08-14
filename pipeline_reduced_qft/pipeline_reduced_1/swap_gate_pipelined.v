@@ -7,7 +7,7 @@
 // Latency: 1 cycle
 module swap_gate_pipelined(
     input                         clk,
-    input                         rst_n,
+    input                         rst_s_n, // Changed to synchronous reset
     input  signed [`TOTAL_WIDTH-1:0] in_001_r, in_001_i,
     input  signed [`TOTAL_WIDTH-1:0] in_100_r, in_100_i,
     input  signed [`TOTAL_WIDTH-1:0] in_011_r, in_011_i,
@@ -23,8 +23,8 @@ module swap_gate_pipelined(
     reg signed [`TOTAL_WIDTH-1:0] out_011_r_reg, out_011_i_reg;
     reg signed [`TOTAL_WIDTH-1:0] out_110_r_reg, out_110_i_reg;
 
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge clk) begin 
+        if (!rst_s_n) begin 
             out_001_r_reg <= 0; out_001_i_reg <= 0;
             out_100_r_reg <= 0; out_100_i_reg <= 0;
             out_011_r_reg <= 0; out_011_i_reg <= 0;

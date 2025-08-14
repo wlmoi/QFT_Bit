@@ -2,9 +2,10 @@
 
 # -------------------------------------------------------------------------------------------------
 # // Primary Clock Definition
-# // Defines a 1000 MHz clock (1 ns period) on the 'clk' input port of the top module.
+# // Defines a 200 MHz clock (5 ns period) on the 'clk' input port of the top module.
+# // This is a more realistic frequency target for complex arithmetic circuits.
 # -------------------------------------------------------------------------------------------------
-create_clock -period 1.000 -name sys_clk [get_ports clk]
+create_clock -period 5.000 -name sys_clk [get_ports clk]
 
 # -------------------------------------------------------------------------------------------------
 # // Input Delay Constraints for Data Inputs
@@ -12,10 +13,15 @@ create_clock -period 1.000 -name sys_clk [get_ports clk]
 set_input_delay -clock sys_clk -max 1.000 [get_ports {i*_r i*_i}]
 set_input_delay -clock sys_clk -min 0.000 [get_ports {i*_r i*_i}]
 
-# --- ADDED: Input Delay Constraints for rst_n ---
-# To address the "Missing input or output delay" warning for the rst_n port.
-# These are placeholder values; adjust based on your system's reset characteristics.
-# Note: rst_n is an asynchronous input to the top module, but will be synchronized internally.
+# --- MODIFIED: Input Delay Constraints for rst_n ---
+# The rst_n port is now synchronized internally. Its timing is no longer directly constrained for setup/hold on its input path.
+# However, you still need to acknowledge its existence as an input. You can remove these if your flow automatically handles asynchronous inputs.
+# For now, leaving them with default values, as the synchronizer makes its timing less critical.
+# Vivado will treat this as an unconstrained path if it infers it as an asynchronous set/reset.
+# If `rst_n` is truly asynchronous, it does not require set_input_delay.
+# For a fully synchronous reset from an async input, only the async input path to the synchronizer flops matters.
+# However, in many tool flows, it's safer to provide constraints to avoid unconstrained path warnings.
+# Given the synchronizer, the specific values become less critical for functional timing of the design core.
 set_input_delay -clock sys_clk -max 5.000 [get_ports rst_n]
 set_input_delay -clock sys_clk -min 0.000 [get_ports rst_n]
 
@@ -24,8 +30,6 @@ set_input_delay -clock sys_clk -min 0.000 [get_ports rst_n]
 # // Output Delay Constraints
 # // Defines the maximum and minimum delays for signals leaving the FPGA's output pins
 # // relative to the clock edge.
-# # If setup violations persist on output paths, you may need to increase the -max value
-# # after verifying allowed delay with the external receiving device.
 # -------------------------------------------------------------------------------------------------
 set_output_delay -clock sys_clk -max 1.000 [get_ports {f*_r f*_i}]
 set_output_delay -clock sys_clk -min 0.000 [get_ports {f*_r f*_i}]
@@ -34,16 +38,10 @@ set_output_delay -clock sys_clk -min 0.000 [get_ports {f*_r f*_i}]
 # -------------------------------------------------------------------------------------------------
 # // Clock Uncertainty
 # // Models variations in the clock period due to jitter and other factors.
-# // This reduces the effective clock period available for logic, making timing analysis more pessimistic.
+# // Reduced to a more typical percentage of the new 5ns period.
 # -------------------------------------------------------------------------------------------------
-set_clock_uncertainty -setup 0.5 [get_clocks sys_clk]
-set_clock_uncertainty -hold 0.5 [get_clocks sys_clk]
+set_clock_uncertainty -setup 0.25 [get_clocks sys_clk] # 5% of 5ns period
+set_clock_uncertainty -hold 0.25 [get_clocks sys_clk]  # 5% of 5ns period
 
-# --- REMOVED: Problematic set_min_delay constraint ---
-# This constraint previously caused extreme hold violations due to over-constraining or Vivado's inability to meet it.
-# With proper reset synchronization, Vivado should have more flexibility to fix hold violations automatically.
-# Removed: set_min_delay -from [get_pins {*delayed_s4_s5_r_reg[1][1][6]_srl5_delayed_s1_s2_r_reg_c_0/Q}] -to [get_pins {*delayed_s4_s5_r_reg[1][2][6]_delayed_s1_s2_r_reg_c_1/D}] 0.400
-
-# --- REMOVED: Unnecessary ASYNC_REG property ---
-# Vivado typically infers asynchronous reset behavior correctly when the reset signal is used in the always block's sensitivity list.
-# Removed: set_property ASYNC_REG TRUE [get_cells -hierarchical -filter {NAME =~ "*rst_n_reg*" || NAME =~ "*rst_reg*"}]
+# --- REMOVED: Problematic set_min_delay constraint (as before) ---
+# --- REMOVED: Unnecessary ASYNC_REG property (as before) ---

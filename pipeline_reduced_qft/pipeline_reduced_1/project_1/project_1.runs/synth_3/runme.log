@@ -1,0 +1,313 @@
+
+*** Running vivado
+    with args -log qft3_top_pipelined.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source qft3_top_pipelined.tcl
+
+
+
+****** Vivado v2025.1 (64-bit)
+  **** SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+  **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+  **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+  **** Start of session at: Thu Aug 14 16:16:55 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source qft3_top_pipelined.tcl -notrace
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 492.141 ; gain = 212.883
+Command: synth_design -top qft3_top_pipelined -part xczu7eg-ffvf1517-1LV-i
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu7eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu7eg'
+INFO: [Device 21-403] Loading part xczu7eg-ffvf1517-1LV-i
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 22936
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1881.738 ; gain = 210.668
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'qft3_top_pipelined' [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft3_top_pipelined.v:6]
+INFO: [Synth 8-6157] synthesizing module 'h_gate_simplified' [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/h_gate_simplified.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'h_gate_simplified' (0#1) [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/h_gate_simplified.v:7]
+INFO: [Synth 8-6157] synthesizing module 'ccmult_pipelined' [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/ccmult_pipelined.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'ccmult_pipelined' (0#1) [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/ccmult_pipelined.v:7]
+INFO: [Synth 8-6157] synthesizing module 'swap_gate_pipelined' [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/swap_gate_pipelined.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'swap_gate_pipelined' (0#1) [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/swap_gate_pipelined.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'qft3_top_pipelined' (0#1) [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft3_top_pipelined.v:6]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2015.871 ; gain = 344.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2015.871 ; gain = 344.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2015.871 ; gain = 344.801
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.075 . Memory (MB): peak = 2015.871 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft_timing.xdc]
+create_clock: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2118.492 ; gain = 0.043
+CRITICAL WARNING: [Common 17-165] Too many positional options when parsing 'period', please type 'set_clock_uncertainty -help' for usage info. [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft_timing.xdc:43]
+CRITICAL WARNING: [Common 17-165] Too many positional options when parsing 'period', please type 'set_clock_uncertainty -help' for usage info. [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft_timing.xdc:44]
+Finished Parsing XDC File [D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/qft_timing.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2118.492 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.098 . Memory (MB): peak = 2118.492 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 2118.492 ; gain = 447.422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu7eg-ffvf1517-1LV-i
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 2118.492 ; gain = 447.422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 2118.492 ; gain = 447.422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 2118.492 ; gain = 447.422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   17 Bit       Adders := 6     
+	   2 Input   17 Bit       Adders := 6     
+	   2 Input    9 Bit       Adders := 24    
+	   3 Input    9 Bit       Adders := 24    
++---Registers : 
+	               17 Bit    Registers := 24    
+	               14 Bit    Registers := 48    
+	                9 Bit    Registers := 48    
+	                8 Bit    Registers := 400   
+	                1 Bit    Registers := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1728 (col length:144)
+BRAMs: 624 (col length: RAMB18 144 RAMB36 72)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:38 ; elapsed = 00:00:43 . Memory (MB): peak = 2118.492 ; gain = 447.422
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:50 ; elapsed = 00:00:57 . Memory (MB): peak = 2770.117 ; gain = 1099.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:00:59 . Memory (MB): peak = 2792.516 ; gain = 1121.445
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:53 ; elapsed = 00:01:01 . Memory (MB): peak = 2804.055 ; gain = 1132.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:00 ; elapsed = 00:01:08 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:00 ; elapsed = 00:01:08 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-------------------+---------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name        | RTL Name                        | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-------------------+---------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|qft3_top_pipelined | h_q1_p1/beta_r_s1_reg[7]        | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q1_p1/alpha_r_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p0/beta_r_s1_reg[7]        | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p0/beta_r_s1_reg[7]        | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q1_p0/alpha_r_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p0/alpha_r_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f000_r_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p1/beta_i_s1_reg[7]        | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q1_p1/alpha_i_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p0/beta_i_s1_reg[7]        | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p0/beta_i_s1_reg[7]        | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q1_p0/alpha_i_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p0/alpha_i_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f000_i_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c10_p0/ai_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c10_p0/ar_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p1/beta_r_s1_reg[7]        | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p1/alpha_r_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f010_r_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p1/beta_i_s1_reg[7]        | 6      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p1/alpha_i_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f010_i_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c21_p1/ai_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c21_p1/ar_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c20_p1/ai_s1_reg[7]             | 6      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c20_p1/ar_s1_reg[7]             | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p3/beta_r_s1_reg[7]        | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c20_p0/ai_s1_reg[7]             | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c20_p0/ar_s1_reg[7]             | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p3/alpha_r_s1_reg[7]       | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p2/beta_r_s1_reg[7]        | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c21_p0/ai_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c21_p0/ar_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p2/beta_r_s1_reg[7]        | 11     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p2/alpha_r_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p2/alpha_r_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f101_r_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p3/beta_i_s1_reg[7]        | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p3/alpha_i_s1_reg[7]       | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p2/beta_i_s1_reg[7]        | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p2/beta_i_s1_reg[7]        | 13     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q1_p2/alpha_i_s1_reg[7]       | 19     | 8     | YES          | NO                 | YES               | 0      | 8       | 
+|qft3_top_pipelined | h_q0_p2/alpha_i_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f101_i_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c10_p1/ai_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | c10_p1/ar_s1_reg[7]             | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p3/beta_r_s1_reg[7]        | 4      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p3/alpha_r_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f111_r_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p3/beta_i_s1_reg[7]        | 6      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | h_q0_p3/alpha_i_s1_reg[7]       | 12     | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | f111_i_reg_reg[7]               | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_001_r_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_001_i_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_100_r_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_100_i_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_011_r_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_011_i_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_110_r_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
+|qft3_top_pipelined | final_swap/out_110_i_reg_reg[7] | 5      | 8     | YES          | NO                 | YES               | 8      | 0       | 
++-------------------+---------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY8  |   328|
+|3     |LUT1    |   202|
+|4     |LUT2    |  1732|
+|5     |LUT3    |    80|
+|6     |LUT4    |   160|
+|7     |LUT5    |    16|
+|8     |SRL16E  |   400|
+|9     |SRLC32E |    80|
+|10    |FDCE    |     2|
+|11    |FDRE    |  2135|
+|12    |IBUF    |   130|
+|13    |OBUF    |   128|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:41 ; elapsed = 00:00:58 . Memory (MB): peak = 3023.785 ; gain = 1250.094
+Synthesis Optimization Complete : Time (s): cpu = 00:01:01 ; elapsed = 00:01:10 . Memory (MB): peak = 3023.785 ; gain = 1352.715
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.073 . Memory (MB): peak = 3023.785 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 459 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 3023.785 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 131 instances were transformed.
+  BUFG => BUFGCE: 1 instance 
+  IBUF => IBUF (IBUFCTRL, INBUF): 130 instances
+
+Synth Design complete | Checksum: d85d1d3d
+INFO: [Common 17-83] Releasing license: Synthesis
+23 Infos, 1 Warnings, 2 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:13 ; elapsed = 00:01:26 . Memory (MB): peak = 3023.785 ; gain = 2531.645
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.085 . Memory (MB): peak = 3023.785 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/QFT_Bit/pipeline_reduced_qft/pipeline_reduced_1/project_1/project_1.runs/synth_3/qft3_top_pipelined.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file qft3_top_pipelined_utilization_synth.rpt -pb qft3_top_pipelined_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Aug 14 16:18:33 2025...

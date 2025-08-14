@@ -5,7 +5,7 @@ module qft3_top_pipelined_tb;
 
     // --- Clock and Reset ---
     reg clk;
-    reg rst_n;
+    reg rst_n; // Asynchronous reset input for the DUT
 
     // --- Inputs to the DUT ---
     reg  signed [`TOTAL_WIDTH-1:0] i000_r, i000_i, i001_r, i001_i, i010_r, i010_i, i011_r, i011_i;
@@ -17,7 +17,7 @@ module qft3_top_pipelined_tb;
 
     // --- Instantiate the DUT ---
     qft3_top_pipelined uut (
-        .clk(clk), .rst_n(rst_n),
+        .clk(clk), .rst_n(rst_n), // Connects the asynchronous reset to the DUT
         .i000_r(i000_r), .i000_i(i000_i), .i001_r(i001_r), .i001_i(i001_i),
         .i010_r(i010_r), .i010_i(i010_i), .i011_r(i011_r), .i011_i(i011_i),
         .i100_r(i100_r), .i100_i(i100_i), .i101_r(i101_r), .i101_i(i101_i),
@@ -31,11 +31,14 @@ module qft3_top_pipelined_tb;
     // --- Fixed-Point Constants for Test ---
     localparam S34_ONE = 16; // 1.0 in S3.4 format (1 * 2^4)
     localparam S34_AMP = 6;  // Expected approximate amplitude of output components
+    localparam S34_TOL = 2; // Tolerance for fixed-point comparisons (+/- 2 LSB)
     
     // --- UPDATED PIPELINE LATENCY ---
-    // Total latency = 6 stages * 3 cycles/stage (H/CROT) + 1 stage * 1 cycle/stage (SWAP) = 19
-    localparam PIPELINE_LATENCY = 19;
-
+    // Total latency = (Max_stage_latency * Number_of_pipelined_stages_in_QFT) + Swap_gate_latency
+    // QFT has 6 pipelined stages (3 H-gates, 3 CROT-gates), each aligned to max latency of 7 cycles.
+    // Plus the final SWAP gate which has 1 cycle latency.
+    localparam PIPELINE_LATENCY = (6 * 7) + 1; // 42 + 1 = 43 cycles.
+    
     // Clock generator
     initial begin
         clk = 0;
@@ -45,22 +48,30 @@ module qft3_top_pipelined_tb;
     // --- Test Sequence ---
     initial begin
         $display("--- 3-Qubit QFT Pipelined Testbench ---");
-        // Initialize all inputs to zero
+        // Initialize all inputs to zero initially
         {i000_r,i000_i,i001_r,i001_i,i010_r,i010_i,i011_r,i011_i} = 0;
         {i100_r,i100_i,i101_r,i101_i,i110_r,i110_i,i111_r,i111_i} = 0;
 
-        // Pulse reset
+        // Step 1: Assert asynchronous reset (rst_n low)
         rst_n = 1'b0;
-        #20;
-        rst_n = 1'b1;
-        #5;
+        // Hold reset active for a generous number of clock cycles to ensure all registers are truly reset.
+        repeat(10) @(posedge clk); 
+        
+        // Step 2: De-assert asynchronous reset (rst_n high)
+        rst_n = 1'b1; 
 
-        // Test Case: Apply QFT to the state |110> (the number 6)
+        // Step 3: Wait for the synchronous reset (rst_s_n inside DUT) to propagate and de-assert.
+        // It takes 2 clock cycles for the two synchronizing flip-flops.
+        // We wait for 3 cycles to be absolutely certain it's de-asserted and stable.
+        repeat(3) @(posedge clk); 
+        // At this point, the internal synchronous reset (rst_s_n) should be de-asserted and stable.
+
+        // Step 4: Apply input state |110> (1.0) on the current positive clock edge
         $display("Applying input state |110> (1.0) at time %t", $time);
         i110_r = S34_ONE;
 
-        // Wait for the pipeline to fill and for the result to be ready
-        repeat(PIPELINE_LATENCY + 2) @(posedge clk);
+        // Step 5: Wait for the pipeline to fill and for the result to be ready
+        repeat(PIPELINE_LATENCY) @(posedge clk); 
         
         $display("Checking output after %d cycles at time %t", PIPELINE_LATENCY, $time);
 
@@ -73,7 +84,16 @@ module qft3_top_pipelined_tb;
 
         // Check against the expected S3.4 values, allowing for small rounding errors.
         // The check verifies the phase relationship (1, -i, -1, i, ...) and that the amplitude is close to the expected value.
-        if (f000_r > (S34_AMP-2) && f001_i < (-S34_AMP+2) && f010_r < (-S34_AMP+2) && f011_i > (S34_AMP-2)) begin
+        // Allow for +/- S34_TOL error due to fixed-point approximation.
+        if ( (f000_r >= (S34_AMP-S34_TOL) && f000_r <= (S34_AMP+S34_TOL) && (f000_i >= -S34_TOL && f000_i <= S34_TOL)) &&
+             ((f001_r >= -S34_TOL && f001_r <= S34_TOL) && f001_i >= (-S34_AMP-S34_TOL) && f001_i <= (-S34_AMP+S34_TOL)) &&
+             (f010_r >= (-S34_AMP-S34_TOL) && f010_r <= (-S34_AMP+S34_TOL) && (f010_i >= -S34_TOL && f010_i <= S34_TOL)) &&
+             ((f011_r >= -S34_TOL && f011_r <= S34_TOL) && f011_i >= (S34_AMP-S34_TOL) && f011_i <= (S34_AMP+S34_TOL)) &&
+             (f100_r >= (S34_AMP-S34_TOL) && f100_r <= (S34_AMP+S34_TOL) && (f100_i >= -S34_TOL && f100_i <= S34_TOL)) &&
+             ((f101_r >= -S34_TOL && f101_r <= S34_TOL) && f101_i >= (-S34_AMP-S34_TOL) && f101_i <= (-S34_AMP+S34_TOL)) &&
+             (f110_r >= (-S34_AMP-S34_TOL) && f110_r <= (-S34_AMP+S34_TOL) && (f110_i >= -S34_TOL && f110_i <= S34_TOL)) &&
+             ((f111_r >= -S34_TOL && f111_r <= S34_TOL) && f111_i >= (S34_AMP-S34_TOL) && f111_i <= (S34_AMP+S34_TOL))
+           ) begin
             $display("\nResult: PASSED ✅");
         end else begin
             $display("\nResult: FAILED ❌");
